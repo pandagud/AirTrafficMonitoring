@@ -7,13 +7,32 @@ using TransponderReceiver;
 
 namespace AirTrafficMonitoringLogic
 {
-    public class Test
+    public class Test :ITransponderReceiver
     {
         private TransponderReceiver.TransponderReceiverFactory receiver = new TransponderReceiverFactory();
+        private TransponderDataEventArgs eventArgs = new TransponderDataEventArgs();
+        private RawTransponderDataEventArgs rawTransponderData;
+        public event EventHandler<RawTransponderDataEventArgs> TransponderDataReady;
 
-        public void getSomething()
+        public Test()
         {
-            var something = receiver;
+            var reciever = TransponderReceiverFactory.CreateTransponderDataReceiver();
+            reciever.TransponderDataReady += getSomething;
+
         }
+
+        public void SeeData()
+        {
+           
+        }
+
+        public static void getSomething(object o, RawTransponderDataEventArgs args)
+        {
+            var data = args.TransponderData;
+
+
+        }
+
+       
     }
 }

@@ -12,9 +12,29 @@ namespace AirTrafficMonitoring
         
         static void Main(string[] args)
         {
-             Test test  =new Test();
-            test.getSomething();
+
+          
+            var myReciever = TransponderReceiver.TransponderReceiverFactory.CreateTransponderDataReceiver();
+            myReciever.TransponderDataReady += MyReceiver_TransportData;
+            Console.ReadKey();
+
         }
+
+        private static void MyReceiver_TransportData(object sender, TransponderReceiver.RawTransponderDataEventArgs e)
+        {
+            var recivedData = e.TransponderData;
+            PrintData(recivedData);
+        }
+
+        private static void PrintData(List<string> data)
+        {
+            foreach (var e in data)
+            {
+                Console.WriteLine(e);
+            }
+        }
+
+       
 
        
 
