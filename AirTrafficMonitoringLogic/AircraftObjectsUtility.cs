@@ -16,7 +16,7 @@ namespace AirTrafficMonitoringLogic
             bool firsttime = true;
              for (int i = 0; i < data.Count; i++)
              {
-                 var localarray = SplitToArray(i);
+                 var localarray = SplitToArray(data,i);
                  var localAircraftobject = ArrayToAircraftObject(localarray);
                  aircrafts.Add(localAircraftobject);
 
@@ -26,13 +26,13 @@ namespace AirTrafficMonitoringLogic
             return aircrafts;
         }
 
-        public string[] SplitToArray( int index)
+        public string[] SplitToArray(List<string>data, int index)
         {
-            string[] split = new string[DTO.ListofRecovedData.Count];
-            string element = DTO.ListofRecovedData[index];
+            string[] split = new string[data.Count];
+            string element = data[index];
             for (int j = 0; j < element.Length; j++)
             {
-                split = DTO.ListofRecovedData[index].Split(new char[] { ';' });
+                split = data[index].Split(new char[] { ';' });
 
             }
 
@@ -46,32 +46,6 @@ namespace AirTrafficMonitoringLogic
             return currentAircraft;
         }
 
-        //public List<Aircraft> AddAircrafttoList(Aircraft data)
-        //{
-        //    if (aircrafts.Count == 0)
-        //    {
-        //        aircrafts.Add(data);
-        //    }
-        //    else
-        //    {
-        //        foreach (var xAircraft in aircrafts.ToList())
-        //        {
-        //            if (data._tag == xAircraft._tag)
-        //            {
-        //                xAircraft._xcoordinate = data._xcoordinate;
-        //                xAircraft._ycoordinate = data._ycoordinate;
-        //                xAircraft._timestamp = data._timestamp;
-        //                xAircraft._altitude = data._altitude;
-        //            }
-        //            else
-        //            {
-        //                aircrafts.Add(data);
-        //            }
-        //        }
-        //    }
-
-        //    return aircrafts;
-
-        //}
+       
     }
 }
