@@ -45,6 +45,8 @@
   <ItemGroup>
     <Compile Include="Aircraft.cs" />
     <Compile Include="AircraftObjectsUtility.cs" />
+    <Compile Include="Interface\IAirCraftObjectsUtility.cs" />
+    <Compile Include="Interface\IPrint.cs" />
     <Compile Include="Print.cs" />
     <Compile Include="Utillity\DTO.cs" />
     <Compile Include="RecieveAircrafts.cs" />

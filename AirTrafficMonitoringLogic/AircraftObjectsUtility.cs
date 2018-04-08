@@ -3,17 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AirTrafficMonitoringLogic.Interface;
 
 namespace AirTrafficMonitoringLogic
 {
-    public class AircraftObjectsUtility
+    public class AircraftObjectsUtility:IAirCraftObjectsUtility
     {
         private List<Aircraft> aircrafts;
         public List<Aircraft> getListofAircraftObjects(List<string> data)
         {
             
             aircrafts = new List<Aircraft>();
-            bool firsttime = true;
+            
              for (int i = 0; i < data.Count; i++)
              {
                  var localarray = SplitToArray(data,i);
