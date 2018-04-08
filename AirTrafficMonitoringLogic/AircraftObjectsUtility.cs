@@ -14,7 +14,7 @@ namespace AirTrafficMonitoringLogic
         {
             
             aircrafts = new List<Aircraft>();
-            bool firsttime = true;
+            
              for (int i = 0; i < data.Count; i++)
              {
                  var localarray = SplitToArray(data,i);
