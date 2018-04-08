@@ -11,15 +11,18 @@ namespace AirTrafficMonitoringLogic
     public class RecieveAircrafts 
     {
         List<String> localList = new List<string>();
-        private AircraftObjectsUtility aircraftObjectsUtility;
         private IPrint _print;
-       
+        private IAirCraftObjectsUtility _aircraftObjectsUtility;
+        public List<Aircraft> localListofAircraftObjects;
 
-        public RecieveAircrafts(ITransponderReceiver receiver,IPrint print)
+
+
+        public RecieveAircrafts(ITransponderReceiver receiver,IPrint print,IAirCraftObjectsUtility aircraftObjectsUtility)
         {
             _print = print;
-                aircraftObjectsUtility = new AircraftObjectsUtility();
-            
+            _aircraftObjectsUtility = aircraftObjectsUtility;
+
+
             receiver.TransponderDataReady += MyReceiver_TransportData;
         }
         public void MyReceiver_TransportData(object sender, TransponderReceiver.RawTransponderDataEventArgs e)
@@ -36,8 +39,8 @@ namespace AirTrafficMonitoringLogic
         {
             var handler = TransponderDataReady;
             handler?.Invoke(this, data);
-            
-            var localListofAircraftObjects = aircraftObjectsUtility.getListofAircraftObjects(data.TransponderData);
+
+            localListofAircraftObjects = _aircraftObjectsUtility.getListofAircraftObjects(data.TransponderData);
            
             _print.PrintData(localListofAircraftObjects);
             
