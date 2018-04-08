@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -34,18 +35,30 @@ namespace AirTrafficMonitoringUnitTest
         public void PrintData_()
         {
             
-            string outputline = "Tag name is: PKY304 Current position is : 94273,54214 Current altitude is: 12300 current timestamp : 20180408143635889";
-            _print.PrintData(aircraftList);
-            var currentConsoleOut = Console.Out;
-            
-            //using (var consoleOutput = new ConsoleOutput())
-            //{
+            using (StringWriter sw = new StringWriter())
+            {
+                string outputline = "Tag name is: PKY304 Current position is : 94273,54214 Current altitude is: 12300 current timestamp : 20180408143635889";
+                Console.SetOut(sw);
+
+                _print.PrintData(aircraftList);
                 
 
-            //    Assert.AreEqual(outputline, consoleOutput.GetOuput());
-            //}
+                string expected = string.Format("Ploeh{0}", Environment.NewLine);
+                Assert.AreEqual(expected, sw.ToString());
+            }
 
-            Assert.AreEqual(outputline, currentConsoleOut);
+            ////string outputline = "Tag name is: PKY304 Current position is : 94273,54214 Current altitude is: 12300 current timestamp : 20180408143635889";
+            //_print.PrintData(aircraftList);
+            //var currentConsoleOut = Console.Out;
+            
+            ////using (var consoleOutput = new ConsoleOutput())
+            ////{
+                
+
+            ////    Assert.AreEqual(outputline, consoleOutput.GetOuput());
+            ////}
+
+            //Assert.AreEqual(outputline, currentConsoleOut);
         }
 }
 }

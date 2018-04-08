@@ -9,5 +9,6 @@ namespace AirTrafficMonitoringLogic.Interface
     public interface IPrint
     {
         void PrintData(List<Aircraft> data);
+      
     }
 }

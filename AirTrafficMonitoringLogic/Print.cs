@@ -19,5 +19,7 @@ namespace AirTrafficMonitoringLogic
                 Console.WriteLine(e.ToString());
             }
         }
+
+       
     }
 }
