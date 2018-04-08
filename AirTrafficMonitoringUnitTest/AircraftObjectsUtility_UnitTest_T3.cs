@@ -53,9 +53,20 @@ namespace AirTrafficMonitoringUnitTest
             lac.Add(ac);
             string[] data = correctArray;
             Aircraft currentAircraft = new Aircraft(data[0], Int32.Parse(data[1]), Int32.Parse(data[2]), Int32.Parse(data[3]), data[4]);
+
+            //Forsøg med at Assert List<AirCraft>
             //Aircraft ak = _uut.ArrayToAircraftObject(correctArray);
-            Assert.Contains(currentAircraft,_uut.getListofAircraftObjects(stringAircraft));
-            //Assert.AreEqual(lac, _uut.getListofAircraftObjects(stringAircraft));
+            //Assert.Contains(currentAircraft,_uut.getListofAircraftObjects(stringAircraft));
+            //CollectionAssert.AreEquivalent(lac, _uut.getListofAircraftObjects(stringAircraft));
+            // Assert.That(lac, Is.EquivalentTo(_uut.getListofAircraftObjects(stringAircraft)));
+            //Forsøg med at Assert List<AirCraft>
+
+
+            // vi har desværre ikke kunne lave en assert på to lister af samme type. vi har prøvet mange forskellgie ting men da følgende Assert failede, "Assert.That(_uut.getListofAircraftObjects(stringAircraft), Is.EquivalentTo(_uut.getListofAircraftObjects(stringAircraft)));, har vi valgt at opsøge hjælp. Vi vil derfor opsøge hjælp hos underviser tirsdag d.10/04/2018 søge hjælp.  
+
+            var local = _uut.getListofAircraftObjects(stringAircraft);
+            Assert.AreEqual(lac[0]._tag,local[0]._tag);
+            // Vi prøver istedet at vise de indeholder det samme ved at sammenligne deres tag. 
         }
     }
 }

@@ -15,7 +15,7 @@ namespace AirTrafficMonitoringLogic
         public string _timestamp { get; set; }
 
 
-        public Aircraft(string tag1, int xcoordinate1, int ycoordinate1, int altitude1,string timestamp1)
+        public Aircraft(string tag1, int xcoordinate1, int ycoordinate1, int altitude1, string timestamp1)
         {
             _timestamp = timestamp1;
             _tag = tag1;
@@ -29,5 +29,6 @@ namespace AirTrafficMonitoringLogic
             return "Tag name is: " + _tag + " Current position is : " + _xcoordinate + "," + _ycoordinate +
                    " Current altitude is :" + _altitude + " current timestamp :" + _timestamp;
         }
+
     }
 }

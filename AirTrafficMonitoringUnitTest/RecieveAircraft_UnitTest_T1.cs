@@ -41,7 +41,7 @@ namespace AirTrafficMonitoringUnitTest
         }
 
         [Test]
-        public void ReciveAirCrafts_MyReceiver_TransportData_Test_1()
+        public void ReciveAirCrafts_MyReceiver_TransportData()
         {
             var args = new RawTransponderDataEventArgs(new List<string> {"VBF451;94717;28912;7300;20180408143814504"});
             _receiver.TransponderDataReady += Raise.EventWith(args);
@@ -49,7 +49,7 @@ namespace AirTrafficMonitoringUnitTest
             
         }
         [Test]
-        public void ReciveAirCrafts_UpdateTransponderData_CallToAirCraftUtiliy_Test_2()
+        public void ReciveAirCrafts_UpdateTransponderData_CallToAirCraftUtiliy()
         {
             var args = new RawTransponderDataEventArgs(new List<string> { "VBF451;94717;28912;7300;20180408143814504" });
             _receiver.TransponderDataReady += Raise.EventWith(args);
@@ -57,7 +57,7 @@ namespace AirTrafficMonitoringUnitTest
 
         }
         [Test]
-        public void ReciveAirCrafts_UpdateTransponderData_CallToPrint_Test_3()
+        public void ReciveAirCrafts_UpdateTransponderData_CallToPrint()
         {
             var args = new RawTransponderDataEventArgs(new List<string> { "VBF451;94717;28912;7300;20180408143814504" });
             _receiver.TransponderDataReady += Raise.EventWith(args);
