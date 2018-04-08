@@ -18,7 +18,8 @@ namespace AirTrafficMonitoring
             //var myReciever = TransponderReceiver.TransponderReceiverFactory.CreateTransponderDataReceiver();
             //myReciever.TransponderDataReady += MyReceiver_TransportData;
             DTO.ListofAircraftObj = new List<Aircraft>();
-            RecieveAircrafts recieveAircrafts = new RecieveAircrafts();
+            var myReciever = TransponderReceiver.TransponderReceiverFactory.CreateTransponderDataReceiver();
+            RecieveAircrafts recieveAircrafts = new RecieveAircrafts(myReciever);
             //do
             //{
             //    while (!Console.KeyAvailable)

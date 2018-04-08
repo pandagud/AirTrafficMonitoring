@@ -45,9 +45,9 @@
   <ItemGroup>
     <Compile Include="Aircraft.cs" />
     <Compile Include="AircraftObjectsUtility.cs" />
+    <Compile Include="Print.cs" />
     <Compile Include="Utillity\DTO.cs" />
     <Compile Include="RecieveAircrafts.cs" />
-    <Compile Include="Test.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

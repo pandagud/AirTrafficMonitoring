@@ -9,12 +9,12 @@ namespace AirTrafficMonitoringLogic
     public class AircraftObjectsUtility
     {
         private List<Aircraft> aircrafts;
-        public List<Aircraft> getListofAircraftObjects()
+        public List<Aircraft> getListofAircraftObjects(List<string> data)
         {
             
             aircrafts = new List<Aircraft>();
             bool firsttime = true;
-             for (int i = 0; i < DTO.ListofRecovedData.Count; i++)
+             for (int i = 0; i < data.Count; i++)
              {
                  var localarray = SplitToArray(i);
                  var localAircraftobject = ArrayToAircraftObject(localarray);

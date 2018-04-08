@@ -3,18 +3,23 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TransponderReceiver;
 
 namespace AirTrafficMonitoringLogic
 {
-    public class RecieveAircrafts
+    public class RecieveAircrafts 
     {
+        List<String> localList = new List<string>();
+        private AircraftObjectsUtility aircraftObjectsUtility;
        
-        public RecieveAircrafts()
+
+        public RecieveAircrafts(ITransponderReceiver receiver)
         {
-            var myReciever = TransponderReceiver.TransponderReceiverFactory.CreateTransponderDataReceiver();
-            myReciever.TransponderDataReady += MyReceiver_TransportData;
+                aircraftObjectsUtility = new AircraftObjectsUtility();
+            
+            receiver.TransponderDataReady += MyReceiver_TransportData;
         }
-        public static void MyReceiver_TransportData(object sender, TransponderReceiver.RawTransponderDataEventArgs e)
+        public void MyReceiver_TransportData(object sender, TransponderReceiver.RawTransponderDataEventArgs e)
         {
             var recivedData = e.TransponderData;
             if (DTO.ListofRecovedData == null)
@@ -26,22 +31,28 @@ namespace AirTrafficMonitoringLogic
             {
                 DTO.ListofRecovedData = recivedData;
             }
-            AircraftObjectsUtility aircraftObjectsUtility = new AircraftObjectsUtility();
-            var localListofAircraftObjects =aircraftObjectsUtility.getListofAircraftObjects();
-            DTO.ListofAircraftObj = localListofAircraftObjects;
-            PrintData(localListofAircraftObjects);
 
+            UpdateTransponderData(new RawTransponderDataEventArgs(recivedData));
+            //localList = recivedData;
+        
         }
-        private static void PrintData(List<Aircraft> data)
+        private void UpdateTransponderData(RawTransponderDataEventArgs data)
         {
-            Console.Clear();
-            foreach (var e in data)
-            {
-                Console.WriteLine(e.ToString());
-            }
+            var handler = TransponderDataReady;
+            handler?.Invoke(this, data);
+            DTO.ListofRecovedData = data.TransponderData;
+            var localListofAircraftObjects = aircraftObjectsUtility.getListofAircraftObjects(data.TransponderData);
+            DTO.ListofAircraftObj = localListofAircraftObjects;
+            Print.PrintData(localListofAircraftObjects);
             
         }
 
+       
+
+
+        public event EventHandler<RawTransponderDataEventArgs> TransponderDataReady;
+
 
     }
+  
 }
