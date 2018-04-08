@@ -25,6 +25,7 @@ namespace AirTrafficMonitoringUnitTest
             Aircraft aircraft1 = new Aircraft("PKY304", 94273, 54214, 12300, "20180408143635889");
             Aircraft aircraft2 = new Aircraft("LPM304", 67390, 43672, 11900, "20180409143635888");
             aircraftList.Add(aircraft1);
+            _print = new Print();
             
             //aircraftList.Add(aircraft2);
             
@@ -34,16 +35,17 @@ namespace AirTrafficMonitoringUnitTest
         {
             
             string outputline = "Tag name is: PKY304 Current position is : 94273,54214 Current altitude is: 12300 current timestamp : 20180408143635889";
+            _print.PrintData(aircraftList);
             var currentConsoleOut = Console.Out;
-
+            
             //using (var consoleOutput = new ConsoleOutput())
             //{
-            //    _print.PrintData(aircraftList);
+                
 
             //    Assert.AreEqual(outputline, consoleOutput.GetOuput());
             //}
 
-            Assert.AreEqual(outputline, Console.Out);
+            Assert.AreEqual(outputline, currentConsoleOut);
         }
 }
 }
