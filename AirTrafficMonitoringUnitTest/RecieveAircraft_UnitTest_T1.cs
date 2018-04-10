@@ -24,9 +24,9 @@ namespace AirTrafficMonitoringUnitTest
         private IPrint _print;
         private IAirCraftObjectsUtility _airCraftObjectsUtility;
         private IAirCraftObjectsUtility _realAirCraftObjectsUtility;
-       
 
-        
+
+
         [SetUp]
         public void SetUp()
         {
@@ -37,11 +37,11 @@ namespace AirTrafficMonitoringUnitTest
             _uut = new RecieveAircrafts(_receiver, _airCraftObjectsUtility);
             _aircraftlist = new List<Aircraft>();
             _list = new List<string>();
-            
+
             _nEventsReceived = 0;
             _mEvnetsReceived = 0;
 
-            _uut.TransponderDataReady += (o, args) =>
+            _receiver.TransponderDataReady += (o, args) =>
             {
                 _list = args.TransponderData;
                 _aircraftlist = _realAirCraftObjectsUtility.getListofAircraftObjects(_list);
@@ -49,7 +49,7 @@ namespace AirTrafficMonitoringUnitTest
             };
             _uut.TransponderDataObjectReady += (args) =>
             {
-                
+
                 _aircraftlist = _realAirCraftObjectsUtility.getListofAircraftObjects(_list);
                 _mEvnetsReceived++;
             };
@@ -60,10 +60,10 @@ namespace AirTrafficMonitoringUnitTest
         [Test]
         public void ReciveAirCrafts_MyReceiver_TransportData()
         {
-            var args = new RawTransponderDataEventArgs(new List<string> {"VBF451;94717;28912;7300;20180408143814504"});
+            var args = new RawTransponderDataEventArgs(new List<string> { "VBF451;94717;28912;7300;20180408143814504" });
             _receiver.TransponderDataReady += Raise.EventWith(args);
-            Assert.That(_uut.called);
-            
+            Assert.AreEqual(_list[0], "VBF451;94717;28912;7300;20180408143814504");
+
         }
         // Virker ikke på nuværende tidspunkt da vi har haft udfordringer med at test på eventhandler. Vi får nogle null objects som vi skal undersøge nærmere. 
         [Test]
@@ -71,20 +71,20 @@ namespace AirTrafficMonitoringUnitTest
         {
             var args = new RawTransponderDataEventArgs(new List<string> { "VBF451;94717;28912;7300;20180408143814504" });
             _receiver.TransponderDataReady += Raise.EventWith(args);
-            
-            Assert.AreEqual(1,_mEvnetsReceived);
+
+            Assert.AreEqual(1, _mEvnetsReceived);
 
 
         }
-        //[Test]
-        //public void ReciveAirCrafts_UpdateTransponderData_CallToAirCraftUtiliy()
-        //{
-        //    var args = new RawTransponderDataEventArgs(new List<string> { "VBF451;94717;28912;7300;20180408143814504" });
-        //    _receiver.TransponderDataReady += Raise.EventWith(args);
+        [Test]
+        public void ReciveAirCrafts_UpdateTransponderData_CallToAirCraftUtiliy()
+        {
+            var args = new RawTransponderDataEventArgs(new List<string> { "VBF451;94717;28912;7300;20180408143814504" });
+            _receiver.TransponderDataReady += Raise.EventWith(args);
 
-        //    _airCraftObjectsUtility.Received().getListofAircraftObjects(_list);
+            _airCraftObjectsUtility.Received().getListofAircraftObjects(_list);
 
-        //}
+        }
 
 
 
