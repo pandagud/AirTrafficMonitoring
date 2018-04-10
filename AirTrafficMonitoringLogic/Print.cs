@@ -10,8 +10,23 @@ namespace AirTrafficMonitoringLogic
 {
     public class Print:IPrint
     {
+        public Print(IRecieveAircrafts IRA)
+        {
+            IRA.TransponderDataObjectReady += PrintData; ;
+        }
 
-        void IPrint.PrintData(List<Aircraft> data)
+    
+
+        //void PrintData(List<Aircraft> data)
+        //{
+        //    Console.Clear();
+        //    foreach (var e in data)
+        //    {
+        //        Console.WriteLine(e.ToString());
+        //    }
+        //}
+
+        public void PrintData(List<Aircraft> data)
         {
             Console.Clear();
             foreach (var e in data)
@@ -19,7 +34,5 @@ namespace AirTrafficMonitoringLogic
                 Console.WriteLine(e.ToString());
             }
         }
-
-       
     }
 }

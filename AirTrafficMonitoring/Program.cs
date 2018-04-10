@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using AirTrafficMonitoringLogic;
+using AirTrafficMonitoringLogic.Interface;
 
 namespace AirTrafficMonitoring
 {
@@ -18,9 +19,10 @@ namespace AirTrafficMonitoring
            
             DTO.ListofAircraftObj = new List<Aircraft>();
             var myReciever = TransponderReceiver.TransponderReceiverFactory.CreateTransponderDataReceiver();
-            Print _print = new Print();
+            
             AircraftObjectsUtility _aircraftObjectsUtility = new AircraftObjectsUtility();
-            RecieveAircrafts recieveAircrafts = new RecieveAircrafts(myReciever, _print, _aircraftObjectsUtility);
+            IRecieveAircrafts recieveAircrafts = new RecieveAircrafts(myReciever, _aircraftObjectsUtility);
+            Print _print = new Print(recieveAircrafts);
            
             Console.ReadLine();
 

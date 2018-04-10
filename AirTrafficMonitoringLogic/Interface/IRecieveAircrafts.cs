@@ -6,10 +6,9 @@ using System.Threading.Tasks;
 
 namespace AirTrafficMonitoringLogic.Interface
 {
-    public interface IPrint
+    public interface IRecieveAircrafts
     {
-        void PrintData(List<Aircraft> data);
-        
-      
+       
+        event RecieveAircrafts.MyEventHandler TransponderDataObjectReady;
     }
 }
