@@ -22,7 +22,10 @@ namespace AirTrafficMonitoring
             
             AircraftObjectsUtility _aircraftObjectsUtility = new AircraftObjectsUtility();
             IRecieveAircrafts recieveAircrafts = new RecieveAircrafts(myReciever, _aircraftObjectsUtility);
-            Print _print = new Print(recieveAircrafts);
+
+            IObserver _print = new Print(recieveAircrafts);
+            MonitoringAirSpace _monitoringAirSpace = new MonitoringAirSpace(recieveAircrafts);
+            _monitoringAirSpace.Attach(_print);
            
             Console.ReadLine();
 

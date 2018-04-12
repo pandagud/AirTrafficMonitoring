@@ -46,6 +46,7 @@
     <Compile Include="Aircraft.cs" />
     <Compile Include="AircraftObjectsUtility.cs" />
     <Compile Include="Interface\IAirCraftObjectsUtility.cs" />
+    <Compile Include="Interface\IMonotoringAirSpapce.cs" />
     <Compile Include="Interface\IObserver.cs" />
     <Compile Include="Interface\IPrint.cs" />
     <Compile Include="Interface\IRecieveAircrafts.cs" />

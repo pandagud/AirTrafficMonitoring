@@ -4,15 +4,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using AirTrafficMonitoringLogic.Interface;
+using AirTrafficMonitoringLogic.Utillity;
 
 namespace AirTrafficMonitoringLogic
 {
-    public class MonitoringAirSpace
+    public class MonitoringAirSpace:SubjectObserver,IMonotoringAirSpapce
     {
         private List<Aircraft> localList;
         public MonitoringAirSpace(IRecieveAircrafts _recieveAircrafts)
         {
             _recieveAircrafts.TransponderDataObjectReady += Monitor;
+            
+            
         }
 
         public void Monitor(List<Aircraft> data)
@@ -20,15 +23,35 @@ namespace AirTrafficMonitoringLogic
             localList= new List<Aircraft>();
             foreach (var i in data)
             {
-                if (i._xcoordinate < 10000 && i._ycoordinate < 90000 && 500 < i._altitude && i._altitude < 20000)
+                if (checkForXAndY(i)&&checkForAltitude(i))
                 {
                     localList.Add(i);
                 }
             }
+            Notify(localList);
             
         }
 
-       
+        public bool checkForXAndY(Aircraft data)
+        {
+            if(Enumerable.Range(10000,90000).Contains(data._xcoordinate)&& Enumerable.Range(10000, 90000).Contains(data._ycoordinate))
+            {
+                return true;
+            }
+
+            return false;
+        }
+        public bool checkForAltitude(Aircraft data)
+        {
+            if (Enumerable.Range(500, 20000).Contains(data._altitude))
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+
 
 
     }

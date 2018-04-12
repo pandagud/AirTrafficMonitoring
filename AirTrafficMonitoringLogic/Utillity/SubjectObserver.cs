@@ -10,6 +10,11 @@ namespace AirTrafficMonitoringLogic.Utillity
     public abstract class SubjectObserver
     {
         List<IObserver> ObserverList;
+        public SubjectObserver()
+        {
+                ObserverList = new List<IObserver>();
+        }
+        
 
 
         public void Attach(IObserver o)

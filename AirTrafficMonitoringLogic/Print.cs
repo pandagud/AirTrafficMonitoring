@@ -8,17 +8,28 @@ using AirTrafficMonitoringLogic.Interface;
 
 namespace AirTrafficMonitoringLogic
 {
-    public class Print:IPrint
+    public class Print:IPrint,IObserver
     {
         public Print(IRecieveAircrafts IRA)
         {
-            IRA.TransponderDataObjectReady += PrintData; ;
+            //IRA.TransponderDataObjectReady += PrintData; ;
+            
         }
+
 
         public void PrintData(List<Aircraft> data)
         {
+            //Console.Clear();
+            //foreach (var e in data)
+            //{
+            //    Console.WriteLine(e.ToString());
+            //}
+        }
+
+        public void Update(List<Aircraft> s)
+        {
             Console.Clear();
-            foreach (var e in data)
+            foreach (var e in s)
             {
                 Console.WriteLine(e.ToString());
             }
