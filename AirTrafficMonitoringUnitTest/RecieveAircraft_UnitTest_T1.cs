@@ -85,13 +85,5 @@ namespace AirTrafficMonitoringUnitTest
             _airCraftObjectsUtility.Received().getListofAircraftObjects(_list);
 
         }
-
-
-
-
-
-
-
-
     }
 }
