@@ -15,7 +15,6 @@ namespace AirTrafficMonitoringLogic
             IRA.TransponderDataObjectReady += PrintData; ;
         }
 
-
         public void PrintData(List<Aircraft> data)
         {
             Console.Clear();
