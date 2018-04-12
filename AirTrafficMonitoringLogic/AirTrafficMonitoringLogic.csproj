@@ -48,10 +48,14 @@
     <Compile Include="Interface\IAirCraftObjectsUtility.cs" />
     <Compile Include="Interface\IPrint.cs" />
     <Compile Include="Interface\IRecieveAircrafts.cs" />
+    <Compile Include="MonitoringAirSpace.cs" />
     <Compile Include="Print.cs" />
     <Compile Include="Utillity\DTO.cs" />
     <Compile Include="RecieveAircrafts.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="DTO\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -14,6 +14,7 @@ namespace AirTrafficMonitoringLogic
        // private IPrint _print;
         private IAirCraftObjectsUtility _aircraftObjectsUtility;
         public List<Aircraft> localListofAircraftObjects;
+        
         public bool called = false;
 
 

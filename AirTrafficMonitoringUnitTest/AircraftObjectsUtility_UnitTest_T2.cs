@@ -10,7 +10,7 @@ using NUnit.Framework;
 namespace AirTrafficMonitoringUnitTest
 {
     [TestFixture()]
-    class AircraftObjectsUtility_UnitTest_T3
+    class AircraftObjectsUtility_UnitTest_T2
     {
 
         private AircraftObjectsUtility _uut;
