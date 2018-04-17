@@ -16,13 +16,15 @@ namespace AirTrafficMonitoringUnitTest
         private AircraftObjectsUtility _uut;
         private List<String> stringAircraft;
         private string[] correctArray;
-        
+        private Aircraft _testAircraft;
+
         [SetUp]
         public void SetUp()
         {
             _uut = new AircraftObjectsUtility();
             stringAircraft = new List<string> {"ATR423;39045;12932;14000;20151006213456789"};
             correctArray = new string[] { "ATR423", "39045", "12932", "14000", "20151006213456789" };
+            _testAircraft = _uut.ArrayToAircraftObject(correctArray);
         }
 
 
@@ -41,32 +43,91 @@ namespace AirTrafficMonitoringUnitTest
         [Test]
         public void ArraytoAircraftObject_creates_Aircraft_object()
         {
-            Aircraft ac = new Aircraft("ATR423",Int32.Parse("39045"),Int32.Parse("12932"),Int32.Parse("14000"), "20151006213456789");
+            Aircraft ac = new Aircraft("ATR423",Int32.Parse("39045"),Int32.Parse("12932"),Int32.Parse("14000"), DateTime.ParseExact("20151006213456789", "yyyyMMddHHmmssfff", System.Globalization.CultureInfo.InvariantCulture));
             Assert.That(_uut.ArrayToAircraftObject(correctArray).GetType() == ac.GetType());
         }
 
         [Test]
         public void getListofAircraftObjects_return_listofAircrafts()
         {
-            Aircraft ac = new Aircraft("ATR423", Int32.Parse("39045"), Int32.Parse("12932"), Int32.Parse("14000"), "20151006213456789");
+            Aircraft ac = new Aircraft("ATR423", Int32.Parse("39045"), Int32.Parse("12932"), Int32.Parse("14000"), DateTime.ParseExact("20151006213456789", "yyyyMMddHHmmssfff", System.Globalization.CultureInfo.InvariantCulture));
             List<Aircraft> lac = new List<Aircraft>();
             lac.Add(ac);
-            string[] data = correctArray;
-            Aircraft currentAircraft = new Aircraft(data[0], Int32.Parse(data[1]), Int32.Parse(data[2]), Int32.Parse(data[3]), data[4]);
-
-            //Forsøg med at Assert List<AirCraft>
-            //Aircraft ak = _uut.ArrayToAircraftObject(correctArray);
-            //Assert.Contains(currentAircraft,_uut.getListofAircraftObjects(stringAircraft));
-            //CollectionAssert.AreEquivalent(lac, _uut.getListofAircraftObjects(stringAircraft));
-            // Assert.That(lac, Is.EquivalentTo(_uut.getListofAircraftObjects(stringAircraft)));
-            //Forsøg med at Assert List<AirCraft>
-
-
-            // vi har desværre ikke kunne lave en assert på to lister af samme type. vi har prøvet mange forskellgie ting men da følgende Assert failede, "Assert.That(_uut.getListofAircraftObjects(stringAircraft), Is.EquivalentTo(_uut.getListofAircraftObjects(stringAircraft)));, har vi valgt at opsøge hjælp. Vi vil derfor opsøge hjælp hos underviser tirsdag d.10/04/2018 søge hjælp.  
-
+            
             var local = _uut.getListofAircraftObjects(stringAircraft);
             Assert.AreEqual(lac[0]._tag,local[0]._tag);
-            // Vi prøver istedet at vise de indeholder det samme ved at sammenligne deres tag. 
+            
+        }
+        [Test]
+        public void ReciveAirCrafts_UpdateTransponderData_TestOfTag()
+        {
+            Assert.That(_testAircraft._tag, Is.EqualTo("ATR423"));
+
+        }
+        [Test]
+        public void ReciveAirCrafts_UpdateTransponderData_TestOfX()
+        {
+            Assert.That(_testAircraft._xcoordinate, Is.EqualTo(39045));
+
+        }
+        [Test]
+        public void ReciveAirCrafts_UpdateTransponderData_TestOfY()
+        {
+            Assert.That(_testAircraft._ycoordinate, Is.EqualTo(12932));
+        }
+        [Test]
+        public void ReciveAirCrafts_UpdateTransponderData_TestOfAltitude()
+        {
+            Assert.That(_testAircraft._altitude, Is.EqualTo(14000));
+        }
+        [Test]
+        public void ReciveAirCrafts_UpdateTransponderData_TimestampYearIsCorrect()
+        {
+            
+            Assert.That(_testAircraft._timestamp.Year, Is.EqualTo(2015));
+        }
+
+        [Test]
+        public void ReciveAirCrafts_UpdateTransponderData_TimestampMonthIsCorrect()
+        {
+            Assert.That(_testAircraft._timestamp.Month, Is.EqualTo(10));
+        }
+
+
+        [Test]
+        public void ReciveAirCrafts_UpdateTransponderData_TimestampDayIsCorrect()
+        {
+            Assert.That(_testAircraft._timestamp.Day, Is.EqualTo(06));
+        }
+        [Test]
+        public void ReciveAirCrafts_UpdateTransponderData_TimestampHourIsCorrect()
+        {
+            Assert.That(_testAircraft._timestamp.Hour, Is.EqualTo(21));
+        }
+        [Test]
+        public void ReciveAirCrafts_UpdateTransponderData_TimestampMinuteIsCorrect()
+        {
+            Assert.That(_testAircraft._timestamp.Minute, Is.EqualTo(34));
+        }
+        [Test]
+        public void ReciveAirCrafts_UpdateTransponderData_TimestampSecondIsCorrect()
+        {
+            Assert.That(_testAircraft._timestamp.Second, Is.EqualTo(56));
+        }
+        [Test]
+        public void ReciveAirCrafts_UpdateTransponderData_TimestampMSIsCorrect()
+        {
+            Assert.That(_testAircraft._timestamp.Millisecond, Is.EqualTo(789));
+        }
+        [Test]
+        public void ReciveAirCrafts_UpdateTransponderData_Velocity()
+        {
+            Assert.That(_testAircraft.Velocity, Is.EqualTo(0));
+        }
+        [Test]
+        public void ReciveAirCrafts_UpdateTransponderData_Course()
+        {
+            Assert.That(_testAircraft.Course, Is.EqualTo(0));
         }
     }
 }

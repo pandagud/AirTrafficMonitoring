@@ -12,12 +12,12 @@ namespace AirTrafficMonitoringLogic
         public int _xcoordinate { get; set; }
         public int _ycoordinate { get; set; }
         public int _altitude { get; set; }
-        public string _timestamp { get; set; }
+        public DateTime _timestamp { get; set; }
         public int Velocity { get; set; }
         public int Course { get; set; }
 
 
-        public Aircraft(string tag1, int xcoordinate1, int ycoordinate1, int altitude1, string timestamp1)
+        public Aircraft(string tag1, int xcoordinate1, int ycoordinate1, int altitude1, DateTime timestamp1)
         {
             _timestamp = timestamp1;
             _tag = tag1;
