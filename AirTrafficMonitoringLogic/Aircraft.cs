@@ -13,6 +13,8 @@ namespace AirTrafficMonitoringLogic
         public int _ycoordinate { get; set; }
         public int _altitude { get; set; }
         public string _timestamp { get; set; }
+        public int Velocity { get; set; }
+        public int Course { get; set; }
 
 
         public Aircraft(string tag1, int xcoordinate1, int ycoordinate1, int altitude1, string timestamp1)
@@ -22,6 +24,8 @@ namespace AirTrafficMonitoringLogic
             _xcoordinate = xcoordinate1;
             _ycoordinate = ycoordinate1;
             _altitude = altitude1;
+            Velocity = 0;
+            Course = 0;
         }
 
         public override string ToString()
