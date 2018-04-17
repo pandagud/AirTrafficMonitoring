@@ -119,5 +119,15 @@ namespace AirTrafficMonitoringUnitTest
         {
             Assert.That(_testAircraft._timestamp.Millisecond, Is.EqualTo(789));
         }
+        [Test]
+        public void ReciveAirCrafts_UpdateTransponderData_Velocity()
+        {
+            Assert.That(_testAircraft.Velocity, Is.EqualTo(0));
+        }
+        [Test]
+        public void ReciveAirCrafts_UpdateTransponderData_Course()
+        {
+            Assert.That(_testAircraft.Course, Is.EqualTo(0));
+        }
     }
 }
