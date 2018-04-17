@@ -43,7 +43,7 @@ namespace AirTrafficMonitoringLogic
 
         public Aircraft ArrayToAircraftObject(string[] data)
         {
-            Aircraft currentAircraft = new Aircraft(data[0], Int32.Parse(data[1]), Int32.Parse(data[2]), Int32.Parse(data[3]), data[4]);
+            Aircraft currentAircraft = new Aircraft(data[0], Int32.Parse(data[1]), Int32.Parse(data[2]), Int32.Parse(data[3]), DateTime.ParseExact(data[4], "yyyyMMddHHmmssfff", System.Globalization.CultureInfo.InvariantCulture));
             return currentAircraft;
         }
 
