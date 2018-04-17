@@ -124,10 +124,17 @@ namespace AirTrafficMonitoringUnitTest
         {
             Assert.That(_testAircraft.Velocity, Is.EqualTo(0));
         }
+
         [Test]
         public void ReciveAirCrafts_UpdateTransponderData_Course()
         {
             Assert.That(_testAircraft.Course, Is.EqualTo(0));
+        }
+
+        [Test]
+        public void TestOfToStringMethod()
+        {
+            Assert.That(_testAircraft.ToString(), Is.EqualTo("Tag name is: ATR423 Current position is: 39045,12932 m, Current Altitude is: 14000 m, Current velocity is: 0 m/s, Current compass course: 0"));
         }
     }
 }
