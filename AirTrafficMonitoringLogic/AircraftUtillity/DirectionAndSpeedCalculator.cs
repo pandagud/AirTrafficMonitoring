@@ -16,23 +16,26 @@ namespace AirTrafficMonitoringLogic.AircraftUtillity
         {
             OldList = new List<Aircraft>();
             CurrentList = new List<Aircraft>();
+            DTO.ListofAircraftObj = new List<Aircraft>();
            
         }
 
         public List<Aircraft> CalculatBoth(List<Aircraft> newList)
         {
-            
+            //DTO.ListofAircraftObj = newList;
             CurrentList = newList;
             
             if (OldList.Count != 0)
             {
-                List<Aircraft> local = new List<Aircraft>();
-                local = newList;
+                List<Aircraft> local = new List<Aircraft>(newList);
+
+                
                 local = SortAircraftList(local);
                 CalculatSpeed(local);
                 
             }
-            
+
+            var test = DTO.ListofAircraftObj;
             OldList = newList;
             return CurrentList;
 
