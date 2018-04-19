@@ -16,20 +16,24 @@ namespace AirTrafficMonitoringLogic.AircraftUtillity
         {
             OldList = new List<Aircraft>();
             CurrentList = new List<Aircraft>();
+           
         }
 
         public List<Aircraft> CalculatBoth(List<Aircraft> newList)
         {
-
-            OldList = CurrentList;
+            
             CurrentList = newList;
+            
             if (OldList.Count != 0)
             {
-                SortAircraftList(newList);
-                CalculatSpeed(newList);
+                List<Aircraft> local = new List<Aircraft>();
+                local = newList;
+                local = SortAircraftList(local);
+                CalculatSpeed(local);
                 
             }
-
+            
+            OldList = newList;
             return CurrentList;
 
         }
@@ -59,33 +63,33 @@ namespace AirTrafficMonitoringLogic.AircraftUtillity
             return newlist;
         }
 
-        public List<Aircraft> SortAircraftList(List<Aircraft> newlist)
+        public List<Aircraft> SortAircraftList(List<Aircraft> sortList)
         {
-            newlist.OrderBy(Aircraft => Aircraft._tag);
+            sortList.OrderBy(Aircraft => Aircraft._tag);
             OldList.OrderBy(Aircraft => Aircraft._tag);
 
 
-            for (int i = 0; i < newlist.Count; i++)
+            for (int i = 0; i < sortList.Count; i++)
             {
                 try
                 {
-                    if (newlist[i]._tag == OldList[i]._tag)
+                    if (sortList[i]._tag == OldList[i]._tag)
                     {
 
                     }
                 }
                 catch (Exception e)
                 {
-                    if (newlist.Count > OldList.Count)
-                        newlist.RemoveAt(i);
-                    else if (OldList.Count > newlist.Count)
+                    if (sortList.Count > OldList.Count)
+                        sortList.RemoveAt(i);
+                    else if (OldList.Count > sortList.Count)
                     {
                         OldList.RemoveAt(i);
                     }
                     i--;                   
                 }
             }
-            return newlist;
+            return sortList;
         }
     }
     
