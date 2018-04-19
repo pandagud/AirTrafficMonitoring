@@ -33,7 +33,6 @@ namespace AirTrafficMonitoringUnitTest
         private List<Aircraft> FilteredAircraftlist;
         private string[] correctArray;
         private Aircraft _testAircraftTrue;
-        private Aircraft _testAircraftFalse;
         private Aircraft _testAircraftOnBoundary;
         private Aircraft _testAircraftFalseOnCoordinatesUnderAndAltitudeUnder;
         private Aircraft _testAircraftFalseOnCoordinatesOverAndAltitudeOver;
@@ -48,10 +47,10 @@ namespace AirTrafficMonitoringUnitTest
             FilteredAircraftlist = new List<Aircraft>();
             _testAircraftTrue = new Aircraft("ATR423", 39045, 12932, 14000, DateTime.ParseExact("20151006213456789", "yyyyMMddHHmmssfff", System.Globalization.CultureInfo.InvariantCulture));
             _testAircraftOnBoundary = new Aircraft("ATR422", 90000, 10000, 500, DateTime.ParseExact("20151006213456789", "yyyyMMddHHmmssfff", System.Globalization.CultureInfo.InvariantCulture));
-            _testAircraftFalseOnCoordinatesUnderAndAltitudeUnder = new Aircraft("ATR422", 90001, 12000, 590, DateTime.ParseExact("20151006213456789", "yyyyMMddHHmmssfff", System.Globalization.CultureInfo.InvariantCulture));
-            _testAircraftFalseOnCoordinatesOverAndAltitudeOver = new Aircraft("ATR422", 90000, 9999, 590, DateTime.ParseExact("20151006213456789", "yyyyMMddHHmmssfff", System.Globalization.CultureInfo.InvariantCulture));
+            _testAircraftFalseOnCoordinatesUnderAndAltitudeUnder = new Aircraft("ATR422", 9999, 9999, 499, DateTime.ParseExact("20151006213456789", "yyyyMMddHHmmssfff", System.Globalization.CultureInfo.InvariantCulture));
+            _testAircraftFalseOnCoordinatesOverAndAltitudeOver = new Aircraft("ATR422", 90001, 90001, 20020, DateTime.ParseExact("20151006213456789", "yyyyMMddHHmmssfff", System.Globalization.CultureInfo.InvariantCulture));
             
-            AircraftList.Add(_testAircraftFalse);
+            AircraftList.Add(_testAircraftFalseOnCoordinatesOverAndAltitudeOver);
             AircraftList.Add(_testAircraftTrue);
             FilteredAircraftlist.Add(_testAircraftTrue);
             _uut = new MonitoringAirSpace(_testRecieve);
@@ -71,7 +70,7 @@ namespace AirTrafficMonitoringUnitTest
         [Test]
         public void MonitorAirspace_CheckForAltituteTestFalseBoundaryOver()
         {
-            Assert.AreEqual(_uut.checkForAltitude(_testAircraftFalseOnCoordinatesOverAndAltitudeOver),false);
+            Assert.AreEqual(false, _uut.checkForAltitude(_testAircraftFalseOnCoordinatesOverAndAltitudeOver));
 
         }
         public void MonitorAirspace_CheckForAltituteTestFalseBoundaryUnder()
