@@ -62,7 +62,7 @@
     <Compile Include="Utillity\SubjectObserver.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="DTO\" />
+    <Folder Include="Prob\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
