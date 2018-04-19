@@ -44,7 +44,7 @@ namespace AirTrafficMonitoringLogic
         }
         public bool checkForAltitude(Aircraft data)
         {
-            if (data._altitude > 500 && data._altitude < 20001)
+            if (data._altitude > 499 && data._altitude < 20001)
             {
                 return true;
             }
