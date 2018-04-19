@@ -46,6 +46,8 @@
     <Compile Include="Aircraft.cs" />
     <Compile Include="AircraftUtillity\AircraftObjectsUtility.cs" />
     <Compile Include="AircraftUtillity\DirectionAndSpeedCalculator.cs" />
+    <Compile Include="AircraftUtillity\SeparationEventArgs.cs" />
+    <Compile Include="CreateSeparationEvents.cs" />
     <Compile Include="Interface\IAirCraftObjectsUtility.cs" />
     <Compile Include="Interface\IMonotoringAirSpapce.cs" />
     <Compile Include="Interface\IObserver.cs" />
@@ -53,6 +55,7 @@
     <Compile Include="Interface\IRecieveAircrafts.cs" />
     <Compile Include="AircraftUtillity\MonitoringAirSpace.cs" />
     <Compile Include="Print.cs" />
+    <Compile Include="SeparationEventToFileLog.cs" />
     <Compile Include="Utillity\DTO.cs" />
     <Compile Include="RecieveAircrafts.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
