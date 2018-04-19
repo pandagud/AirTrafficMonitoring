@@ -8,75 +8,85 @@ namespace AirTrafficMonitoringLogic.AircraftUtillity
 {
     public class DirectionAndSpeedCalculator
     {
-        public List<Aircraft> savedList;
-        private int firstTime = 0;
+        public List<Aircraft> OldList;
+        public List<Aircraft> CurrentList;
+        
 
         public DirectionAndSpeedCalculator()
         {
-            savedList =new List<Aircraft>();
+            OldList = new List<Aircraft>();
+            CurrentList = new List<Aircraft>();
         }
+
         public List<Aircraft> CalculatBoth(List<Aircraft> newList)
         {
-            
-            if (firstTime != 0)
+
+            OldList = CurrentList;
+            CurrentList = newList;
+            if (OldList.Count != 0)
             {
                 SortAircraftList(newList);
                 CalculatSpeed(newList);
-                return savedList;
+                
             }
-            else
-            {
-                firstTime++;
-                savedList = newList;
-                return savedList;
-            }
+
+            return CurrentList;
+
         }
 
         public List<Aircraft> CalculatDirection(List<Aircraft> newlist)
         {
             return newlist;
         }
+
         public List<Aircraft> CalculatSpeed(List<Aircraft> newlist)
         {
             for (int i = 0; i < newlist.Count; i++)
             {
-                var xDist = Math.Sqrt(Math.Pow(newlist[i]._xcoordinate - savedList[i]._xcoordinate, 2));
-                var yDist = Math.Sqrt(Math.Pow(newlist[i]._ycoordinate - savedList[i]._ycoordinate, 2));
-                var altDist = Math.Sqrt(Math.Pow(newlist[i]._altitude - savedList[i]._altitude, 2));
-               // TimeSpan timeSpan = track.TimeStamp - oldTrack.TimeStamp;
-               // var timeDiff = (timeSpan.TotalMilliseconds) / 1000;
-               // var velocity = 0;
+                var xDist = Math.Sqrt(Math.Pow(newlist[i]._xcoordinate - OldList[i]._xcoordinate, 2));
+                var yDist = Math.Sqrt(Math.Pow(newlist[i]._ycoordinate - OldList[i]._ycoordinate, 2));
+                var altDist = Math.Sqrt(Math.Pow(newlist[i]._altitude - OldList[i]._altitude, 2));
+                TimeSpan timeSpan = newlist[i]._timestamp - OldList[i]._timestamp;
+                var timeDiff = (timeSpan.TotalMilliseconds) / 1000;
+                var velocity = 0;
 
 
-               // velocity = Convert.ToInt32(((Math.Sqrt(Math.Pow(xDist, 2) + Math.Pow(yDist, 2) + Math.Pow(altDist, 2))) / timeDiff));
+                velocity = Convert.ToInt32(
+                    ((Math.Sqrt(Math.Pow(xDist, 2) + Math.Pow(yDist, 2) + Math.Pow(altDist, 2))) / timeDiff));
+                newlist[i].Velocity = velocity;
             }
+
             return newlist;
         }
 
         public List<Aircraft> SortAircraftList(List<Aircraft> newlist)
         {
-            newlist.Sort();
-            savedList.Sort();
-            
+            newlist.OrderBy(Aircraft => Aircraft._tag);
+            OldList.OrderBy(Aircraft => Aircraft._tag);
+
+
             for (int i = 0; i < newlist.Count; i++)
             {
-                if (newlist[i]._tag == savedList[i]._tag)
+                try
                 {
-
-                }
-                else
-                {
-                    if (newlist.Count > savedList.Count)
-                        newlist.RemoveAt(i);
-                    else if(savedList.Count>newlist.Count)
+                    if (newlist[i]._tag == OldList[i]._tag)
                     {
-                        savedList.RemoveAt(i);
+
                     }
                 }
+                catch (Exception e)
+                {
+                    if (newlist.Count > OldList.Count)
+                        newlist.RemoveAt(i);
+                    else if (OldList.Count > newlist.Count)
+                    {
+                        OldList.RemoveAt(i);
+                    }
+                    i--;                   
+                }
             }
-
             return newlist;
         }
-
     }
+    
 }

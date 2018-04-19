@@ -14,17 +14,21 @@ namespace AirTrafficMonitoringLogic
         List<String> localList = new List<string>();
        // private IPrint _print;
         private IAirCraftObjectsUtility _aircraftObjectsUtility;
-        public List<Aircraft> localListofAircraftObjects;
-        
+        public List<Aircraft> ListofAircraftObjects;
+        private DirectionAndSpeedCalculator _directionAndSpeedCalculator;
+        private List<Aircraft> LocalList;
+
+
         public bool called = false;
 
 
 
         public RecieveAircrafts(ITransponderReceiver receiver,IAirCraftObjectsUtility aircraftObjectsUtility)
         {
+
            //_print = print;
             _aircraftObjectsUtility = aircraftObjectsUtility;
-
+            _directionAndSpeedCalculator = new DirectionAndSpeedCalculator();
 
             receiver.TransponderDataReady += MyReceiver_TransportData;
         }
@@ -41,10 +45,12 @@ namespace AirTrafficMonitoringLogic
         {
             called = true;
 
-            localListofAircraftObjects = _aircraftObjectsUtility.getListofAircraftObjects(data.TransponderData);
-            
+            ListofAircraftObjects = _aircraftObjectsUtility.getListofAircraftObjects(data.TransponderData);
+            LocalList = new List<Aircraft>();
+            LocalList = ListofAircraftObjects;
+            _directionAndSpeedCalculator.CalculatBoth(LocalList);
             var handler = TransponderDataObjectReady;
-            handler?.Invoke(localListofAircraftObjects);
+            handler?.Invoke(LocalList);
 
 
           
