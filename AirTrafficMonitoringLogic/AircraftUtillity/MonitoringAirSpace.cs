@@ -34,8 +34,8 @@ namespace AirTrafficMonitoringLogic
 
         public bool checkForXAndY(Aircraft data)
         {
-            if(data._xcoordinate > 9999 && data._xcoordinate < 90001)
-                if (data._ycoordinate > 9999 && data._ycoordinate < 90001)
+            if(data._xcoordinate >= 10000 && data._xcoordinate <= 90000)
+                if (data._ycoordinate >= 10000 && data._ycoordinate <= 90000)
                 {
                     return true;
                 }
@@ -44,7 +44,7 @@ namespace AirTrafficMonitoringLogic
         }
         public bool checkForAltitude(Aircraft data)
         {
-            if (data._altitude > 499 && data._altitude < 20001)
+            if (data._altitude >= 500 && data._altitude <= 20000)
             {
                 return true;
             }
