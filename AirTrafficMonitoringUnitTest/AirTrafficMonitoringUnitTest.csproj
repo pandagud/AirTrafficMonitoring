@@ -59,6 +59,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="MonitorAirSpace_Unittest_T3.cs" />
     <Compile Include="AircraftObjectsUtility_UnitTest_T2.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RecieveAircraft_UnitTest_T1.cs" />

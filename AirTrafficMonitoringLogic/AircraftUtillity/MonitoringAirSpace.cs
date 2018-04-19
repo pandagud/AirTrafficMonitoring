@@ -34,7 +34,7 @@ namespace AirTrafficMonitoringLogic
 
         public bool checkForXAndY(Aircraft data)
         {
-            if(Enumerable.Range(10000,90000).Contains(data._xcoordinate)&& Enumerable.Range(10000, 90000).Contains(data._ycoordinate))
+            if(Enumerable.Range(9999,90001).Contains(data._xcoordinate)&& Enumerable.Range(9999, 90001).Contains(data._ycoordinate))
             {
                 return true;
             }
@@ -43,7 +43,7 @@ namespace AirTrafficMonitoringLogic
         }
         public bool checkForAltitude(Aircraft data)
         {
-            if (Enumerable.Range(500, 20000).Contains(data._altitude))
+            if (Enumerable.Range(499, 20001).Contains(data._altitude))
             {
                 return true;
             }
