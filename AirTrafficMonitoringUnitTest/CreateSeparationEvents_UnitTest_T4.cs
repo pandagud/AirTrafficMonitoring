@@ -30,9 +30,9 @@ namespace AirTrafficMonitoringUnitTest
         public void SetUp()
         {
             AircraftList = new List<Aircraft>();
-            _testAircraft1 = new Aircraft("ATR423", 40000, 70000, 20000, DateTime.ParseExact("20151006213456789", "yyyyMMddHHmmssfff", System.Globalization.CultureInfo.InvariantCulture));
-            _testAircraft2= new Aircraft("ATR424", 40000, 70000, 20000, DateTime.ParseExact("20151006213456789", "yyyyMMddHHmmssfff", System.Globalization.CultureInfo.InvariantCulture));
-            _testAircraft3 = new Aircraft("ATR425", 35000, 35000, 19700, DateTime.ParseExact("20151006213456789", "yyyyMMddHHmmssfff", System.Globalization.CultureInfo.InvariantCulture));
+            _testAircraft1 = new Aircraft("ATR423", 10000, 10000, 20000, DateTime.ParseExact("20151006213456789", "yyyyMMddHHmmssfff", System.Globalization.CultureInfo.InvariantCulture));
+            _testAircraft2= new Aircraft("ATR424", 10000, 10500, 20000, DateTime.ParseExact("20151006213456789", "yyyyMMddHHmmssfff", System.Globalization.CultureInfo.InvariantCulture));
+            _testAircraft3 = new Aircraft("ATR425", 60000, 68738, 19700, DateTime.ParseExact("20151006213456789", "yyyyMMddHHmmssfff", System.Globalization.CultureInfo.InvariantCulture));
             _testAircraft4 = new Aircraft("ATR426", 58000, 23000, 14000, DateTime.ParseExact("20151006213456789", "yyyyMMddHHmmssfff", System.Globalization.CultureInfo.InvariantCulture));
             _testAircraft5 = new Aircraft("ATR427", 45000, 30000, 15000, DateTime.ParseExact("20151006213456789", "yyyyMMddHHmmssfff", System.Globalization.CultureInfo.InvariantCulture));
 
@@ -60,21 +60,17 @@ namespace AirTrafficMonitoringUnitTest
         {
             Assert.AreEqual(false, _uut.checkAltitude(_testAircraft1, _testAircraft4));
         }
-
+        
         [Test]
-        public void CreateSeparationEvents_CheckHorizontalSeparation_onBoundary_5000()
-        {
-            Assert.AreEqual(true, _uut.checkHorizontalSeparation(_testAircraft1, _testAircraft3));
-        }
-        [Test]
-        public void CreateSeparationEvents_CheckHorizontalSeparation_onBoundary_0()
+        public void CreateSeparationEvents_CheckHorizontalSeparation_true()
         {
             Assert.AreEqual(true, _uut.checkHorizontalSeparation(_testAircraft1, _testAircraft2));
         }
+
         [Test]
-        public void CreateSeparationEvents_CheckHorizontalSeparation_Over_5000()
+        public void CreateSeparationEvents_CheckHorizontalSeparation_false()
         {
-            Assert.AreEqual(false, _uut.checkHorizontalSeparation(_testAircraft1, _testAircraft4));
+            Assert.AreEqual(false, _uut.checkHorizontalSeparation(_testAircraft1, _testAircraft3));
         }
     }
 }
