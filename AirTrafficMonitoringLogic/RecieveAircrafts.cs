@@ -16,7 +16,6 @@ namespace AirTrafficMonitoringLogic
         private IAirCraftObjectsUtility _aircraftObjectsUtility;
         public List<Aircraft> ListofAircraftObjects;
         private DirectionAndSpeedCalculator _directionAndSpeedCalculator;
-        private List<Aircraft> LocalList;
 
 
         public bool called = false;
@@ -46,11 +45,9 @@ namespace AirTrafficMonitoringLogic
             called = true;
 
             ListofAircraftObjects = _aircraftObjectsUtility.getListofAircraftObjects(data.TransponderData);
-            LocalList = new List<Aircraft>();
-            LocalList = ListofAircraftObjects;
-           _directionAndSpeedCalculator.CalculatBoth(LocalList);
+           _directionAndSpeedCalculator.CalculatBoth(ListofAircraftObjects);
             var handler = TransponderDataObjectReady;
-            handler?.Invoke(LocalList);
+            handler?.Invoke(ListofAircraftObjects);
 
 
           

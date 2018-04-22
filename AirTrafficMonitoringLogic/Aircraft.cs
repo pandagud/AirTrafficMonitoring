@@ -14,7 +14,7 @@ namespace AirTrafficMonitoringLogic
         public int _altitude { get; set; }
         public DateTime _timestamp { get; set; }
         public int Velocity { get; set; }
-        public int Course { get; set; }
+        public double Course { get; set; }
 
 
         public Aircraft(string tag1, int xcoordinate1, int ycoordinate1, int altitude1, DateTime timestamp1)
