@@ -18,6 +18,7 @@ namespace AirTrafficMonitoringLogic
 
         public void Update(List<Aircraft> s)
         {
+            
             List<Aircraft> _tempList = new List<Aircraft>(s);
 
             for (int i = 0; i < s.Count; i++)
