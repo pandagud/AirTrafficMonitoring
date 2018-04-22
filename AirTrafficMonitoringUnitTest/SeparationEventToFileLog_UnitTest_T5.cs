@@ -3,40 +3,43 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AirTrafficMonitoringLogic;
 using NSubstitute;
 using NUnit.Framework;
 using NUnit.Framework.Internal;
+using System.Text;
+using System.IO;
 
 namespace AirTrafficMonitoringUnitTest
 {
     [TestFixture]
     class SeparationEventToFileLog_UnitTest_T5
     {
-        [Test]
-        public void WriteMovieListToFileTest1()
+        private SeparationEventToFileLog _uut;
+        private Aircraft _testAircraft1;
+        private Aircraft _testAircraft2;
+        private string _tags;
+        private string _date;
+        private string _path;
+        [SetUp]
+        public void Setup()
         {
-            Movie movie1 = new Movie("Title", "Genre", "Actor", "Year");
-            movieSystem.AddMovie(movie1);
-            movieSystem.WriteMovieListToFile("MovieListTEST.txt");
+            _uut = new SeparationEventToFileLog();
+            _testAircraft1 = new Aircraft("ATR423", 10000, 10000, 20000, DateTime.ParseExact("20151006213456789", "yyyyMMddHHmmssfff", System.Globalization.CultureInfo.InvariantCulture));
+            _testAircraft2 = new Aircraft("ATR424", 10000, 10500, 20000, DateTime.ParseExact("20151006213456789", "yyyyMMddHHmmssfff", System.Globalization.CultureInfo.InvariantCulture));
+            _tags = "ATR549, RTK985";
+            _date = "20151006213456789";
+            _path = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
 
-            var fileText = File.ReadLines("MovieListTEST.txt");
+
+    }
+        [Test]
+        public void WriteToFile()
+        {
+            _uut.writeToFile(_tags,_date);
+            var fileText = File.ReadLines(_path + @"SeparationEvents.txt");
             Assert.IsTrue(fileText.ToString().Length > 1);
         }
 
-
-
-        private string test = "tag1, tag2 and time of occurence";
-        private string HeaderOfFile = "This txt file contains all the raised separation events";
-        private string path = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-
-        public SeparationEventToFileLog()
-        {
-            File.WriteAllText(path + @"SeparationEvents.txt", HeaderOfFile);
-        }
-
-        public void writeToFile() // indsæt i header den string der skal udskrives og sæt den ind i stedet for test.
-        {
-            File.AppendAllText(path + @"SeparationEvents.txt", test);
-        }
     }
 }
