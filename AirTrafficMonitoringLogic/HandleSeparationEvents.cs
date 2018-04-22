@@ -6,7 +6,14 @@ using System.Threading.Tasks;
 
 namespace AirTrafficMonitoringLogic
 {
-    class HandleSeparationEvents
+    public class HandleSeparationEvents
     {
+        public HandleSeparationEvents()
+        {
+
+        }
+        public void 
+
+        SeparationEventHandler
     }
 }

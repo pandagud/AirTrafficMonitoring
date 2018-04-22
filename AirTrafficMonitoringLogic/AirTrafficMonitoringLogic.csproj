@@ -48,6 +48,7 @@
     <Compile Include="AircraftUtillity\DirectionAndSpeedCalculator.cs" />
     <Compile Include="AircraftUtillity\SeparationEventArgs.cs" />
     <Compile Include="CreateSeparationEvents.cs" />
+    <Compile Include="HandleSeparationEvents.cs" />
     <Compile Include="Interface\IAirCraftObjectsUtility.cs" />
     <Compile Include="Interface\IMonotoringAirSpapce.cs" />
     <Compile Include="Interface\IObserver.cs" />

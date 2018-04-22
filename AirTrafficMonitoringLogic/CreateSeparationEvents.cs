@@ -8,15 +8,17 @@ using AirTrafficMonitoringLogic.Interface;
 
 namespace AirTrafficMonitoringLogic
 {
+    public delegate void SeparationEventHandler(object sender, SeparationEventArgs se);
     public class CreateSeparationEvents : IObserver
     {
-        public delegate void SeparationEventHandler(object sender, SeparationEventArgs se);
+        
 
         private event SeparationEventHandler separationEvent;
         
 
         public void Update(List<Aircraft> s)
         {
+            
             List<Aircraft> _tempList = new List<Aircraft>(s);
 
             for (int i = 0; i < s.Count; i++)
@@ -31,10 +33,13 @@ namespace AirTrafficMonitoringLogic
             }
         }
 
-        public void onSeparationEvent(SeparationEventArgs se)
+        protected virtual void onSeparationEvent(SeparationEventArgs se)
         {
             SeparationEventHandler handler = separationEvent;
-            handler(this, se);
+            if (se != null)
+            {
+                handler(this, se);
+            }
         }
 
         public bool checkAltitude(Aircraft s, Aircraft s1)
