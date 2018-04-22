@@ -26,7 +26,10 @@ namespace AirTrafficMonitoring
             IObserver _print = new Print(recieveAircrafts);
             MonitoringAirSpace _monitoringAirSpace = new MonitoringAirSpace(recieveAircrafts);
             _monitoringAirSpace.Attach(_print);
-           
+            CreateSeparationEvents _cse = new CreateSeparationEvents();
+            _monitoringAirSpace.Attach(_cse);
+            HandleSeparationEvents hse = new HandleSeparationEvents(_cse);
+            
             Console.ReadLine();
 
         }

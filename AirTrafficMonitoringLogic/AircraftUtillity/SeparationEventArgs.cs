@@ -27,7 +27,13 @@ namespace AirTrafficMonitoringLogic.AircraftUtillity
 
         public string getTags()
         {
-            return _tag1 + _tag2;
+            return _tag1 + " " + _tag2;
+        }
+
+        public override string ToString()
+        {
+            return "The following two aircrafts have raised a separation event " + getTags() +
+                                         ". Time of event: " + getTime().ToString();
         }
     }
 }

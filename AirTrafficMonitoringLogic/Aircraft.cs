@@ -30,7 +30,7 @@ namespace AirTrafficMonitoringLogic
 
         public override string ToString()
         {
-            return String.Format(
+            return string.Format(
                 "Tag name is: {0} Current position is: {1},{2} m, Current Altitude is: {3} m, Current velocity is: {4} m/s, Current compass course: {5}",
                 _tag, _xcoordinate, _ycoordinate, _altitude, Velocity, Course);
         }
