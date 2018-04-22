@@ -27,7 +27,7 @@ namespace AirTrafficMonitoringLogic.AircraftUtillity
 
         public string getTags()
         {
-            return _tag1 + _tag2;
+            return _tag1 + " " + _tag2;
         }
     }
 }
