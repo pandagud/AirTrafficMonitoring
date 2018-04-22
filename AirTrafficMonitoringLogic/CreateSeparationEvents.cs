@@ -8,9 +8,10 @@ using AirTrafficMonitoringLogic.Interface;
 
 namespace AirTrafficMonitoringLogic
 {
+    public delegate void SeparationEventHandler(object sender, SeparationEventArgs se);
     public class CreateSeparationEvents : IObserver
     {
-        public delegate void SeparationEventHandler(object sender, SeparationEventArgs se);
+        
 
         private event SeparationEventHandler separationEvent;
         
