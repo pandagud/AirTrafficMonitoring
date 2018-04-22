@@ -31,10 +31,13 @@ namespace AirTrafficMonitoringLogic
             }
         }
 
-        public void onSeparationEvent(SeparationEventArgs se)
+        protected virtual void onSeparationEvent(SeparationEventArgs se)
         {
             SeparationEventHandler handler = separationEvent;
-            handler(this, se);
+            if (se != null)
+            {
+                handler(this, se);
+            }
         }
 
         public bool checkAltitude(Aircraft s, Aircraft s1)
