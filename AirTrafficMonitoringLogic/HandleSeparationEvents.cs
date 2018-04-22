@@ -21,14 +21,38 @@ namespace AirTrafficMonitoringLogic
         public void HandleEvents(object sender, SeparationEventArgs se)
         { // tilføj til liste af eventArgs, hvis det ikke er på listen i forvejen, hvis det ikke er på listen i forvejen udskrives det.
             //lav noget der viser de events der ligger i listen på console
-            if (listOfCurrentSeparationEvents.Any(se.getTags()) ) ;
-            //If løkke der løber igennem listen og ser om se findes i den i forvejen - med de to tags, 
+            //if (listOfCurrentSeparationEvents.Exists(se.getTags()) == true ) ;
+            //If løkke der løber igennem listen og ser om se findes i den i forvejen - med de to tags,
+            bool boaksd = false;
+            for (int i = 0; i < listOfCurrentSeparationEvents.Count; i++)
+            {
+                if (listOfCurrentSeparationEvents[i].getTags() == se.getTags())
+                {
+                    boaksd = true;
+                    listOfCurrentSeparationEvents[i] = se;
+                }
+            }
 
+            if (boaksd == false)
+            {
+                listOfCurrentSeparationEvents.Add(se);
+                writeNewEventsToLog(se);
+            }
+            updateConsole();
         }
 
         public void writeNewEventsToLog(SeparationEventArgs se)
         {
             toFileLog.writeToFile(se.getTags(), se.getTime().ToString());
+        }
+
+        public void updateConsole()
+        {
+            for (int i = 0; i < listOfCurrentSeparationEvents.Count; i++)
+            {
+                Console.Clear();
+                Console.WriteLine(listOfCurrentSeparationEvents[i].ToString());
+            }
         }
 
         
