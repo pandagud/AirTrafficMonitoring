@@ -39,6 +39,7 @@ namespace AirTrafficMonitoringLogic
                 writeNewEventsToLog(se);
             }
             updateConsole();
+            checkForDeactivatedEvents(se);
         }
 
         public void writeNewEventsToLog(SeparationEventArgs se)
@@ -50,12 +51,24 @@ namespace AirTrafficMonitoringLogic
         {
             for (int i = 0; i < listOfCurrentSeparationEvents.Count; i++)
             {
-                Console.Clear();
+                //Console.Clear();
                 Console.WriteLine(listOfCurrentSeparationEvents[i].ToString());
             }
         }
 
-        
-        
+        public void checkForDeactivatedEvents(SeparationEventArgs se)
+        {
+            for (int i = 0; i < listOfCurrentSeparationEvents.Count; i++)
+            {
+                if (listOfCurrentSeparationEvents[i].getTime().AddSeconds(5) < DateTime.Now )
+                {
+                    listOfCurrentSeparationEvents.RemoveAt(i);
+                }
+                
+            }
+        }
+
+
+
     }
 }

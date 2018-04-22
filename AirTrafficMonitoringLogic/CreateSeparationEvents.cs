@@ -23,7 +23,7 @@ namespace AirTrafficMonitoringLogic
 
             for (int i = 0; i < s.Count; i++)
             {
-                if (checkAltitude(s[i], _tempList[0]) == true && checkHorizontalSeparation(s[i], _tempList[0]) == true) // && s[i]._tag != _tempList[0]._tag
+                if (checkAltitude(s[i], _tempList[0]) == true && checkHorizontalSeparation(s[i], _tempList[0]) == true && s[i]._tag != _tempList[0]._tag)
                 {
                     SeparationEventArgs _se = new SeparationEventArgs(s[i]._timestamp,s[i]._tag,_tempList[0]._tag);
                     onSeparationEvent(_se);
