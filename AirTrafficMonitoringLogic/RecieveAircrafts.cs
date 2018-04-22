@@ -45,7 +45,7 @@ namespace AirTrafficMonitoringLogic
             called = true;
 
             ListofAircraftObjects = _aircraftObjectsUtility.getListofAircraftObjects(data.TransponderData);
-           _directionAndSpeedCalculator.CalculatBoth(ListofAircraftObjects);
+           _directionAndSpeedCalculator.CalculateBoth(ListofAircraftObjects);
             var handler = TransponderDataObjectReady;
             handler?.Invoke(ListofAircraftObjects);
 

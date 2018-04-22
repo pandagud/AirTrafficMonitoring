@@ -18,11 +18,11 @@ namespace AirTrafficMonitoringLogic.AircraftUtillity
             CurrentList = new List<Aircraft>();
         }
 
-        public List<Aircraft> CalculatBoth(List<Aircraft> newList)
+        public List<Aircraft> CalculateBoth(List<Aircraft> newList)
         {
             CurrentList = newList;
             
-            if (OldList.Count != 0)
+            if (OldList.Count != 0 && OldList != newList)
             {
                 List<Aircraft> local = new List<Aircraft>(newList);
                 local = SortAircraftList(local);
@@ -56,7 +56,7 @@ namespace AirTrafficMonitoringLogic.AircraftUtillity
                 var altDist = Math.Sqrt(Math.Pow(newlist[i]._altitude - OldList[i]._altitude, 2));
                 TimeSpan timeSpan = newlist[i]._timestamp - OldList[i]._timestamp;
                 var timeDiff = (timeSpan.TotalMilliseconds) / 1000;
-                var velocity = Convert.ToInt32(((Math.Sqrt(Math.Pow(xDist, 2) + Math.Pow(yDist, 2) + Math.Pow(altDist, 2))) / timeDiff));
+                var velocity = Math.Abs(Convert.ToInt32(((Math.Sqrt(Math.Pow(xDist, 2) + Math.Pow(yDist, 2) + Math.Pow(altDist, 2))) / timeDiff)));
                 newlist[i].Velocity = velocity;
             }
             return newlist;
