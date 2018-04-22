@@ -60,12 +60,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CreateSeparationEventsUnitTest.cs" />
+    <Compile Include="CreateSeparationEvents_UnitTest_T5.cs" />
     <Compile Include="DirectionAndSpeedCalculator_UnitTest_T4.cs" />
     <Compile Include="MonitorAirSpace_Unittest_T3.cs" />
     <Compile Include="AircraftObjectsUtility_UnitTest_T2.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RecieveAircraft_UnitTest_T1.cs" />
+    <Compile Include="SeparationEventToFileLog_UnitTest_T6.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
