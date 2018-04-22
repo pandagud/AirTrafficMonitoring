@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using AirTrafficMonitoringLogic;
 using AirTrafficMonitoringLogic.Interface;
+using Castle.Core.Smtp;
 using NSubstitute;
 using NUnit.Framework;
 using NUnit.Framework.Internal;
@@ -25,6 +27,8 @@ namespace AirTrafficMonitoringUnitTest
         private Aircraft _testAircraft3;
         private Aircraft _testAircraft4;
         private Aircraft _testAircraft5;
+        private int _nEventsReceived;
+        private int _mEventsReceived;
 
         [SetUp]
         public void SetUp()
@@ -42,8 +46,25 @@ namespace AirTrafficMonitoringUnitTest
             AircraftList.Add(_testAircraft4);
             AircraftList.Add(_testAircraft5);
             _uut = new CreateSeparationEvents();
+
+            _nEventsReceived = 0;
+            _mEventsReceived = 0;
             
         }
+
+        [Test]
+        public void Update_with_separationEvent()
+        {
+            _uut.Update(AircraftList);
+            _uut.Received()
+            var args = new SeparationEventHandler();
+
+            _uut. += Raise.EventWith(args);
+
+            Assert.AreEqual(1, _mEvnetsReceived);
+        }
+
+        
 
         [Test]
         public void CreateSeparationEvents_CheckAltitude_onBoundary_300()
