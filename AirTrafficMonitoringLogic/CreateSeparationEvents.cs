@@ -31,13 +31,13 @@ namespace AirTrafficMonitoringLogic
             }
         }
 
-        private void onSeparationEvent(SeparationEventArgs se)
+        public void onSeparationEvent(SeparationEventArgs se)
         {
             SeparationEventHandler handler = separationEvent;
             handler(this, se);
         }
 
-        private bool checkAltitude(Aircraft s, Aircraft s1)
+        public bool checkAltitude(Aircraft s, Aircraft s1)
         {
             if (Math.Abs(s._altitude - s1._altitude) <= 300)
             {
@@ -46,7 +46,7 @@ namespace AirTrafficMonitoringLogic
             else return false;
         }
 
-        private bool checkHorizontalSeparation(Aircraft s, Aircraft s1)
+        public bool checkHorizontalSeparation(Aircraft s, Aircraft s1)
         {
             double x = Math.Pow(Math.Abs(s._xcoordinate - s1._xcoordinate), 2);
             double y = Math.Pow(Math.Abs(s._ycoordinate - s1._ycoordinate), 2);
