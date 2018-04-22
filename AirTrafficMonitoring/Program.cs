@@ -26,7 +26,8 @@ namespace AirTrafficMonitoring
             IObserver _print = new Print(recieveAircrafts);
             MonitoringAirSpace _monitoringAirSpace = new MonitoringAirSpace(recieveAircrafts);
             _monitoringAirSpace.Attach(_print);
-           
+            SeparationEventToFileLog testSepToFileLog = new SeparationEventToFileLog();
+            testSepToFileLog.writeToFile();
             Console.ReadLine();
 
         }
