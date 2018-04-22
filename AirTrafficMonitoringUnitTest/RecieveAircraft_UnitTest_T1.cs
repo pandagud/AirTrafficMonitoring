@@ -58,7 +58,7 @@ namespace AirTrafficMonitoringUnitTest
         }
 
         [Test]
-        public void ReciveAirCrafts_MyReceiver_TransportData()
+        public void SeparationEvent_()
         {
             var args = new RawTransponderDataEventArgs(new List<string> { "VBF451;94717;28912;7300;20180408143814504" });
             _receiver.TransponderDataReady += Raise.EventWith(args);
