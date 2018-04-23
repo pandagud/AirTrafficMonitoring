@@ -37,7 +37,7 @@ namespace AirTrafficMonitoringUnitTest
         public void WriteToFile()
         {
             _uut.writeToFile(_tags,_date);
-            var fileText = File.ReadLines(_path + @"SeparationEvents.txt");
+            var fileText = File.ReadLines(_path + @"\SeparationEvents1.txt");
             Assert.IsTrue(fileText.ToString().Length > 1);
         }
 
