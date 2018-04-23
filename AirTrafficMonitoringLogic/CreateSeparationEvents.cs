@@ -10,7 +10,7 @@ namespace AirTrafficMonitoringLogic
 {
     
     public delegate void SeparationEventHandler(object sender, SeparationEventArgs se);
-    public class CreateSeparationEvents : IObserver, ISeprationsEvent
+    public class CreateSeparationEvents : IObserver, ISeparationEvent
     {
      
        

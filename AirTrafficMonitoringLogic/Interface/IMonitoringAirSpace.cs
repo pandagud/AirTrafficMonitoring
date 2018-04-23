@@ -3,12 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using AirTrafficMonitoringLogic.AircraftUtillity;
 
 namespace AirTrafficMonitoringLogic.Interface
 {
-    public interface ISeprationsEvent
+    public interface IMonitoringAirSpace
     {
-        event EventHandler<SeparationEventArgs> SeprationsEvent;
+        void Monitor(List<Aircraft> data);
     }
 }

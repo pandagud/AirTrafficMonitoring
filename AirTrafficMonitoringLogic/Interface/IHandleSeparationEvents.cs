@@ -10,7 +10,6 @@ namespace AirTrafficMonitoringLogic.Interface
     public interface IHandleSeparationEvents
     {
         void HandleEvents(object sender, SeparationEventArgs se);
-        void writeNewEventsToLog(SeparationEventArgs se);
         void updateConsole();
         void checkForDeactivatedEvents(SeparationEventArgs se);
     }

@@ -24,7 +24,7 @@ namespace AirTrafficMonitoringUnitTest
         private CreateSeparationEvents _uut;
         private IHandleSeparationEvents _handleSeparationEvents;
         private List<Aircraft> AircraftList;
-        private ISeprationsEvent eventTest;
+        private ISeparationEvent eventTest;
         private Aircraft _testAircraft1;
         private Aircraft _testAircraft2;
         private Aircraft _testAircraft3;
@@ -40,7 +40,7 @@ namespace AirTrafficMonitoringUnitTest
         {
             AircraftList = new List<Aircraft>();
             _handleSeparationEvents = Substitute.For<IHandleSeparationEvents>();
-            eventTest = Substitute.For<ISeprationsEvent>();
+            eventTest = Substitute.For<ISeparationEvent>();
             AircraftList = new List<Aircraft>();
             _testAircraft1 = new Aircraft("ATR423", 10000, 10000, 20000, DateTime.ParseExact("20151006213456789", "yyyyMMddHHmmssfff", System.Globalization.CultureInfo.InvariantCulture));
             _testAircraft2 = new Aircraft("ATR424", 10000, 10500, 20000, DateTime.ParseExact("20151006213456789", "yyyyMMddHHmmssfff", System.Globalization.CultureInfo.InvariantCulture));
