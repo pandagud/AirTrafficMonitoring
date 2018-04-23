@@ -31,7 +31,7 @@ namespace AirTrafficMonitoringUnitTest
         public void HandleEvents_gettingNewEvent()
         {
             var args = new SeparationEventArgs(DateTime.Now, "fly1", "fly2");
-            _iseSeparationEvent.SeprationsEvent += Raise.EventWith(args);
+            _iseSeparationEvent.SeparationsEvent += Raise.EventWith(args);
             Assert.AreEqual(_uut.listOfCurrentSeparationEvents[0],args);
         }
 
@@ -39,9 +39,9 @@ namespace AirTrafficMonitoringUnitTest
         public void HandleEvents_UpdatingExistingEvent()
         {
             var args1 = new SeparationEventArgs(DateTime.Now, "fly1", "fly2");
-            _iseSeparationEvent.SeprationsEvent += Raise.EventWith(args1);
+            _iseSeparationEvent.SeparationsEvent += Raise.EventWith(args1);
             var args2 = new SeparationEventArgs(DateTime.Now.AddHours(1), "fly1", "fly2");
-            _iseSeparationEvent.SeprationsEvent += Raise.EventWith(args2);
+            _iseSeparationEvent.SeparationsEvent += Raise.EventWith(args2);
             Assert.AreEqual(_uut.listOfCurrentSeparationEvents[0], args2);
         }
 
@@ -49,10 +49,10 @@ namespace AirTrafficMonitoringUnitTest
         public void CheckforDeactivatedEvents()
         {
             var args1 = new SeparationEventArgs(DateTime.Now, "fly1", "fly2");
-            _iseSeparationEvent.SeprationsEvent += Raise.EventWith(args1);
+            _iseSeparationEvent.SeparationsEvent += Raise.EventWith(args1);
             Thread.Sleep(10000);
             var args2 = new SeparationEventArgs(DateTime.Now, "fly2", "fly3");
-            _iseSeparationEvent.SeprationsEvent += Raise.EventWith(args2);
+            _iseSeparationEvent.SeparationsEvent += Raise.EventWith(args2);
             Assert.AreEqual(_uut.listOfCurrentSeparationEvents[0], args2);
         }
 

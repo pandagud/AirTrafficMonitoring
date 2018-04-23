@@ -9,6 +9,6 @@ namespace AirTrafficMonitoringLogic.Interface
 {
     public interface ISeparationEvent
     {
-        event EventHandler<SeparationEventArgs> SeprationsEvent;
+        event EventHandler<SeparationEventArgs> SeparationsEvent;
     }
 }

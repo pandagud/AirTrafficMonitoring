@@ -59,7 +59,7 @@ namespace AirTrafficMonitoringUnitTest
             _uut = new CreateSeparationEvents();
      
 
-            _uut.SeprationsEvent += (o, args) =>
+            _uut.SeparationsEvent += (o, args) =>
             {
                 _sum = args.getTags();
                 _date = args.getTime();
