@@ -16,6 +16,10 @@ namespace AirTrafficMonitoringLogic
 
         public SeparationEventToFileLog()
         {
+            startNewDocument();
+        }
+        private void startNewDocument()
+        {
             File.WriteAllText(path + @"\SeparationEvents1.txt", HeaderOfFile);
         }
 

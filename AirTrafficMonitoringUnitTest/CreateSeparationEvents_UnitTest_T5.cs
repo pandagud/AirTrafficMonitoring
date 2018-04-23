@@ -22,7 +22,6 @@ namespace AirTrafficMonitoringUnitTest
         
 
         private CreateSeparationEvents _uut;
-        private IHandleSeparationEvents _handleSeparationEvents;
         private List<Aircraft> AircraftList;
         private ISeparationEvent eventTest;
         private Aircraft _testAircraft1;
@@ -39,8 +38,6 @@ namespace AirTrafficMonitoringUnitTest
         public void SetUp()
         {
             AircraftList = new List<Aircraft>();
-            _handleSeparationEvents = Substitute.For<IHandleSeparationEvents>();
-            eventTest = Substitute.For<ISeparationEvent>();
             AircraftList = new List<Aircraft>();
             _testAircraft1 = new Aircraft("ATR423", 10000, 10000, 20000, DateTime.ParseExact("20151006213456789", "yyyyMMddHHmmssfff", System.Globalization.CultureInfo.InvariantCulture));
             _testAircraft2 = new Aircraft("ATR424", 10000, 10500, 20000, DateTime.ParseExact("20151006213456789", "yyyyMMddHHmmssfff", System.Globalization.CultureInfo.InvariantCulture));
@@ -63,22 +60,20 @@ namespace AirTrafficMonitoringUnitTest
 
             _uut.SeprationsEvent += (o, args) =>
             {
-                _sum = args.getTags();
+                _sum = args.getTags() + args.getTime();
  
                 _aircraftlist = AircraftList;
                 _nEventsReceived++;
             };
 
-         
-            
         }
 
         [Test]
-        public void Update_with_separationEvent_Tags()
+        public void Update_CheckSeparationEventArgs()
         {
             _uut.Update(AircraftList);
 
-            Assert.AreEqual("ATR424 ATR423", _sum);
+            Assert.AreEqual("ATR424 ATR423" + "10/6/2015 9:34:56 PM", _sum);
         }
 
         [Test]
@@ -121,10 +116,6 @@ namespace AirTrafficMonitoringUnitTest
         public void CreateSeparationEvents_onSeparationEvent()
         {
             
-          
-            //var args = new RawTransponderDataEventArgs(new List<string> { "VBF451;94717;28912;7300;20180408143814504" });
-            //_receiver.TransponderDataReady += Raise.EventWith(args);
-            //Assert.AreEqual(_list[0], "VBF451;94717;28912;7300;20180408143814504");
         }
     }
 }

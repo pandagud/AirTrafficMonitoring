@@ -62,6 +62,7 @@
   <ItemGroup>
     <Compile Include="CreateSeparationEvents_UnitTest_T5.cs" />
     <Compile Include="DirectionAndSpeedCalculator_UnitTest_T4.cs" />
+    <Compile Include="HandleSeparationEvents_Unittest_T7.cs" />
     <Compile Include="MonitorAirSpace_Unittest_T3.cs" />
     <Compile Include="AircraftObjectsUtility_UnitTest_T2.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
