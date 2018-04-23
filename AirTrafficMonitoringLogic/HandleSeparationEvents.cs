@@ -10,13 +10,15 @@ namespace AirTrafficMonitoringLogic
 {
     public class HandleSeparationEvents:IHandleSeparationEvents
     {
-        private SeparationEventToFileLog toFileLog = new SeparationEventToFileLog();
+        
         public List<SeparationEventArgs> listOfCurrentSeparationEvents;
-        public HandleSeparationEvents(ISeprationsEvent cse)
+        private IToLogFile _itlFile;
+        public HandleSeparationEvents(ISeprationsEvent cse, IToLogFile itlFile)
         {
             listOfCurrentSeparationEvents = new List<SeparationEventArgs>();
             cse.SeprationsEvent += HandleEvents;
-            
+            _itlFile = itlFile;
+
         }
 
         public void HandleEvents(object sender, SeparationEventArgs se)
@@ -45,7 +47,7 @@ namespace AirTrafficMonitoringLogic
 
         public void writeNewEventsToLog(SeparationEventArgs se)
         {
-            toFileLog.writeToFile(se.getTags(), se.getTime().ToString());
+            _itlFile.writeNewEventToFile(se.getTags(), se.getTime().ToString());
         }
 
         public void updateConsole()
@@ -63,7 +65,9 @@ namespace AirTrafficMonitoringLogic
             {
                 if (listOfCurrentSeparationEvents[i].getTime().AddSeconds(5) < DateTime.Now )
                 {
+                    _itlFile.writeDoneEventToFile(listOfCurrentSeparationEvents[i].getTags(),listOfCurrentSeparationEvents[i].getTime().ToString());
                     listOfCurrentSeparationEvents.RemoveAt(i);
+                    
                 }
                 
             }
