@@ -31,7 +31,7 @@ namespace AirTrafficMonitoringLogic
                     onSeparationEvent(_se);
                 }
 
-                _tempList.RemoveAt(0);
+              
             }
         }
 
