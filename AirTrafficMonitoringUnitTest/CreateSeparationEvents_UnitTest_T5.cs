@@ -41,16 +41,21 @@ namespace AirTrafficMonitoringUnitTest
             AircraftList = new List<Aircraft>();
             _handleSeparationEvents = Substitute.For<IHandleSeparationEvents>();
             eventTest = Substitute.For<ISeprationsEvent>();
+            AircraftList = new List<Aircraft>();
             _testAircraft1 = new Aircraft("ATR423", 10000, 10000, 20000, DateTime.ParseExact("20151006213456789", "yyyyMMddHHmmssfff", System.Globalization.CultureInfo.InvariantCulture));
-            _testAircraft2= new Aircraft("ATR424", 10000, 10500, 20000, DateTime.ParseExact("20151006213456789", "yyyyMMddHHmmssfff", System.Globalization.CultureInfo.InvariantCulture));
-           
+            _testAircraft2 = new Aircraft("ATR424", 10000, 10500, 20000, DateTime.ParseExact("20151006213456789", "yyyyMMddHHmmssfff", System.Globalization.CultureInfo.InvariantCulture));
+            _testAircraft3 = new Aircraft("ATR425", 60000, 68738, 19700, DateTime.ParseExact("20151006213456789", "yyyyMMddHHmmssfff", System.Globalization.CultureInfo.InvariantCulture));
+            _testAircraft4 = new Aircraft("ATR426", 58000, 23000, 14000, DateTime.ParseExact("20151006213456789", "yyyyMMddHHmmssfff", System.Globalization.CultureInfo.InvariantCulture));
+            _testAircraft5 = new Aircraft("ATR427", 45000, 30000, 15000, DateTime.ParseExact("20151006213456789", "yyyyMMddHHmmssfff", System.Globalization.CultureInfo.InvariantCulture));
+
 
             AircraftList.Add(_testAircraft1);
             AircraftList.Add(_testAircraft2);
             
             _nEventsReceived = 0;
             List<Aircraft>_aircraftlist = new List<Aircraft>();
-            
+               _nEventsReceived = 0;
+            _mEventsReceived = 0;
                 
                 
             _uut = new CreateSeparationEvents();
@@ -64,28 +69,26 @@ namespace AirTrafficMonitoringUnitTest
                 _nEventsReceived++;
             };
 
-
-
-
-            _nEventsReceived = 0;
-            _mEventsReceived = 0;
+         
             
         }
 
         [Test]
-        public void Update_with_separationEvent()
+        public void Update_with_separationEvent_Tags()
         {
             _uut.Update(AircraftList);
-            _uut.Received();
-            //var args = new SeparationEventHandler();
 
-            //_uut. += Raise.EventWith(args);
-
-            //Assert.AreEqual(1, _mEvnetsReceived);
+            Assert.AreEqual("ATR424 ATR423", _sum);
         }
 
-        
+        [Test]
+        public void Update_with_separationEvent_CheckIfEventIsCreated()
+        {
+            _uut.Update(AircraftList);
 
+            Assert.AreEqual(1, _nEventsReceived);
+        }
+       
         [Test]
         public void CreateSeparationEvents_CheckAltitude_onBoundary_300()
         {
@@ -118,9 +121,7 @@ namespace AirTrafficMonitoringUnitTest
         public void CreateSeparationEvents_onSeparationEvent()
         {
             
-            _uut.Update(AircraftList);
-            
-            Assert.AreEqual("ATR424 ATR423", _sum);
+          
             //var args = new RawTransponderDataEventArgs(new List<string> { "VBF451;94717;28912;7300;20180408143814504" });
             //_receiver.TransponderDataReady += Raise.EventWith(args);
             //Assert.AreEqual(_list[0], "VBF451;94717;28912;7300;20180408143814504");
