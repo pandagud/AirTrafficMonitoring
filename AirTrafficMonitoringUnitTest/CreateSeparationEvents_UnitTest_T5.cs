@@ -33,6 +33,7 @@ namespace AirTrafficMonitoringUnitTest
         private int _mEventsReceived;
         
         string _sum;
+        private DateTime _date;
 
         [SetUp]
         public void SetUp()
@@ -60,8 +61,8 @@ namespace AirTrafficMonitoringUnitTest
 
             _uut.SeprationsEvent += (o, args) =>
             {
-                _sum = args.getTags() + args.getTime();
- 
+                _sum = args.getTags();
+                _date = args.getTime();
                 _aircraftlist = AircraftList;
                 _nEventsReceived++;
             };
@@ -69,11 +70,18 @@ namespace AirTrafficMonitoringUnitTest
         }
 
         [Test]
-        public void Update_CheckSeparationEventArgs()
+        public void Update_CheckSeparationEventArgsTags()
         {
             _uut.Update(AircraftList);
 
-            Assert.AreEqual("ATR424 ATR423" + "10/6/2015 9:34:56 PM", _sum);
+            Assert.AreEqual("ATR424 ATR423", _sum);
+        }
+        [Test]
+        public void Update_CheckSeparationEventArgsDate()
+        {
+            _uut.Update(AircraftList);
+            DateTime obj = DateTime.Parse("2015-10-06 21:34:56.789");
+            Assert.AreEqual(obj, _date);
         }
 
         [Test]

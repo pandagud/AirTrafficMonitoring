@@ -44,6 +44,18 @@ namespace AirTrafficMonitoringUnitTest
 
         }
 
+        [Test]
+        public void HandleEvents_UpdatingExistingEvent()
+        {
+
+        }
+
+        [Test]
+        public void CheckforDeactivatedEvents()
+        {
+
+        }
+
 
 
     }
