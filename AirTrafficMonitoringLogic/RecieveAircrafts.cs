@@ -48,9 +48,6 @@ namespace AirTrafficMonitoringLogic
            _directionAndSpeedCalculator.CalculateBoth(ListofAircraftObjects);
             var handler = TransponderDataObjectReady;
             handler?.Invoke(ListofAircraftObjects);
-
-
-          
             
         }
 

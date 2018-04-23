@@ -4,17 +4,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using AirTrafficMonitoringLogic.AircraftUtillity;
+using AirTrafficMonitoringLogic.Interface;
 
 namespace AirTrafficMonitoringLogic
 {
-    public class HandleSeparationEvents
+    public class HandleSeparationEvents:IHandleSeparationEvents
     {
         private SeparationEventToFileLog toFileLog = new SeparationEventToFileLog();
         public List<SeparationEventArgs> listOfCurrentSeparationEvents;
-        public HandleSeparationEvents(CreateSeparationEvents cse)
+        public HandleSeparationEvents(ISeprationsEvent cse)
         {
             listOfCurrentSeparationEvents = new List<SeparationEventArgs>();
-            cse.separationEvent += HandleEvents;
+            cse.SeprationsEvent += HandleEvents;
             
         }
 

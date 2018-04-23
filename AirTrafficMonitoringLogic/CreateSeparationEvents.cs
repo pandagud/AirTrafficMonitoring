@@ -8,12 +8,14 @@ using AirTrafficMonitoringLogic.Interface;
 
 namespace AirTrafficMonitoringLogic
 {
+    
     public delegate void SeparationEventHandler(object sender, SeparationEventArgs se);
-    public class CreateSeparationEvents : IObserver
+    public class CreateSeparationEvents : IObserver, ISeprationsEvent
     {
-        
+     
+       
 
-        public event SeparationEventHandler separationEvent;
+       // public event SeparationEventHandler separationEvent;
         
 
         public void Update(List<Aircraft> s)
@@ -21,11 +23,11 @@ namespace AirTrafficMonitoringLogic
             
             List<Aircraft> _tempList = new List<Aircraft>(s);
 
-            for (int i = 0; i < s.Count; i++)
+            for (int i = 0; i < s.Count-1; i++)
             {
-                if (checkAltitude(s[i], _tempList[0]) == true && checkHorizontalSeparation(s[i], _tempList[0]) == true && s[i]._tag != _tempList[0]._tag)
+                if (checkAltitude(s[i+1], _tempList[i]) == true && checkHorizontalSeparation(s[i+1], _tempList[i]) == true && s[i+1]._tag != _tempList[i]._tag)
                 {
-                    SeparationEventArgs _se = new SeparationEventArgs(s[i]._timestamp,s[i]._tag,_tempList[0]._tag);
+                    SeparationEventArgs _se = new SeparationEventArgs(s[i+1]._timestamp,s[i+1]._tag,_tempList[i]._tag);
                     onSeparationEvent(_se);
                 }
 
@@ -35,7 +37,7 @@ namespace AirTrafficMonitoringLogic
 
         protected virtual void onSeparationEvent(SeparationEventArgs se)
         {
-            SeparationEventHandler handler = separationEvent;
+            var handler = SeprationsEvent;
             if (se != null)
             {
                 handler(this, se);
@@ -62,5 +64,7 @@ namespace AirTrafficMonitoringLogic
             }
             else return false;
         }
+
+        public event EventHandler<SeparationEventArgs> SeprationsEvent;
     }
 }

@@ -28,6 +28,7 @@ namespace AirTrafficMonitoring
             _monitoringAirSpace.Attach(_print);
             CreateSeparationEvents _cse = new CreateSeparationEvents();
             _monitoringAirSpace.Attach(_cse);
+
             HandleSeparationEvents hse = new HandleSeparationEvents(_cse);
             
             Console.ReadLine();

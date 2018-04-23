@@ -50,11 +50,13 @@
     <Compile Include="CreateSeparationEvents.cs" />
     <Compile Include="HandleSeparationEvents.cs" />
     <Compile Include="Interface\IAirCraftObjectsUtility.cs" />
+    <Compile Include="Interface\IHandleSeparationEvents.cs" />
     <Compile Include="Interface\IMonotoringAirSpapce.cs" />
     <Compile Include="Interface\IObserver.cs" />
     <Compile Include="Interface\IPrint.cs" />
     <Compile Include="Interface\IRecieveAircrafts.cs" />
     <Compile Include="AircraftUtillity\MonitoringAirSpace.cs" />
+    <Compile Include="Interface\ISeprationsEvent.cs" />
     <Compile Include="Print.cs" />
     <Compile Include="SeparationEventToFileLog.cs" />
     <Compile Include="Utillity\DTO.cs" />
