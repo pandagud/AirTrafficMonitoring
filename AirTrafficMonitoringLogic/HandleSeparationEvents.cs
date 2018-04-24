@@ -17,7 +17,7 @@ namespace AirTrafficMonitoringLogic
         private IToLogFile _itlFile;
         public HandleSeparationEvents(ISeparationEvent cse, IToLogFile itlFile,IPrint print)
         {
-            listOfCurrentSeparationEvents = new List<SeparationEventArgs>();
+            //listOfCurrentSeparationEvents = new List<SeparationEventArgs>();
             listOfOldSeparationEvents = new List<SeparationEventArgs>();
             _Print = print;
             _itlFile = itlFile;

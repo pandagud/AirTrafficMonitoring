@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
+using System.IO;
 using System.Text;
 using System.Threading.Tasks;
 using AirTrafficMonitoringLogic;
@@ -40,8 +40,14 @@ namespace AirTrafficMonitoringIntegrationTest
         [Test]
         public void ConnectToPrint()
         {
-            _handleSeparationEvents.Update(_listSeperationsArgs);
-            // Check Connect how?
+            
+            using (StringWriter sw = new StringWriter())
+            {
+                Console.SetOut(sw);
+                _handleSeparationEvents.Update(_listSeperationsArgs);          
+                string expected = string.Format(_listSeperationsArgs[0].ToString() + "\r\n");
+                Assert.AreEqual(expected, sw.ToString());
+            }
         }
 
 

@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using AirTrafficMonitoringLogic.Interface;
 using AirTrafficMonitoringLogic.Utillity;
 
-namespace AirTrafficMonitoringLogic
+namespace AirTrafficMonitoringLogic.AircraftUtillity
 {
     public class MonitoringAirSpace:SubjectObserver,IMonitoringAirSpace
     {

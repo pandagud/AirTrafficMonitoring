@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using AirTrafficMonitoringLogic;
@@ -29,7 +28,10 @@ namespace AirTrafficMonitoringIntegrationTest
         private IPrint _iPrint;
         private Aircraft _aircraft1;
         private Aircraft _aircraft2;
+        private Aircraft _aircraft3;
+        private Aircraft _aircraft4;
         private List<Aircraft> _listaircraft;
+        private List<Aircraft> _NoEventlistaircraft;
 
 
         [SetUp]
@@ -43,24 +45,38 @@ namespace AirTrafficMonitoringIntegrationTest
             _iTransponderReceiver = Substitute.For<ITransponderReceiver>();
             _iRecieveAircrafts = new RecieveAircrafts(_iTransponderReceiver,_iAirCraftObjectsUtility,_iCourseAndVelocityCalculator);
             _ImonitoringAirSpace = new MonitoringAirSpace(_iRecieveAircrafts);
-
+            _NoEventlistaircraft = new List<Aircraft>();
             _aircraft1 = new Aircraft("VBF451", 67000, 28912, 7300, DateTime.ParseExact("20180408143814504", "yyyyMMddHHmmssfff", System.Globalization.CultureInfo.InvariantCulture));
 
             _aircraft2 = new Aircraft("VBF452", 67050, 28800, 7200, DateTime.ParseExact("20180408143814504", "yyyyMMddHHmmssfff", System.Globalization.CultureInfo.InvariantCulture));
+
+            _aircraft3 = new Aircraft("VBF451", 27000, 20000, 5000, DateTime.ParseExact("20180408143814504", "yyyyMMddHHmmssfff", System.Globalization.CultureInfo.InvariantCulture));
+
+            _aircraft4 = new Aircraft("VBF452", 74050, 28800, 8000, DateTime.ParseExact("20180408143814504", "yyyyMMddHHmmssfff", System.Globalization.CultureInfo.InvariantCulture));
             _listaircraft = new List<Aircraft>();
             _listaircraft.Add(_aircraft1);
             _listaircraft.Add(_aircraft2);
+            _NoEventlistaircraft.Add(_aircraft3);
+            _NoEventlistaircraft.Add(_aircraft4);
 
             _handleSeparationEvents = new HandleSeparationEvents(_SeparationEvent, _iToLogFile, _iPrint);
             _SeparationEvent.Attach(_handleSeparationEvents);
         }
 
         [Test]
-        public void itOfHandleEvents()
+        public void _seperationEvent_ToHandleSeprationEvent_Checking_Print()
         {
            
             _SeparationEvent.Update(_listaircraft);
             _iPrint.Received().PrintData(_handleSeparationEvents.listOfCurrentSeparationEvents[0]);
+
+        }
+        [Test]
+        public void _seperationEvent_ToHandleSeprationEvent_Not_Checking_Print()
+        {
+
+            _SeparationEvent.Update(_NoEventlistaircraft);
+            Assert.That(_handleSeparationEvents.listOfCurrentSeparationEvents!=null);
 
         }
 

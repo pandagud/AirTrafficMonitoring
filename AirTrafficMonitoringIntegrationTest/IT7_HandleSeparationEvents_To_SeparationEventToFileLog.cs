@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using AirTrafficMonitoringLogic;
@@ -20,7 +19,7 @@ namespace AirTrafficMonitoringIntegrationTest
         private IHandleSeparationEvents _handleSeparationEvents;
         private IToLogFile _iToLogFile;
         private CreateSeparationEvents _separationEvent;
-
+        private string path = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
         private SeparationEventArgs _se1;
         public List<SeparationEventArgs> _listSeperationsArgs;
 
@@ -39,12 +38,38 @@ namespace AirTrafficMonitoringIntegrationTest
 
 
         [Test]
-        public void ConnectToFileLog()
+        public void ConnectToFileLog_WriteNewEventsToLog()
         {
-            _handleSeparationEvents.checkForNewEvents(_listSeperationsArgs);
-            // Check connect how?
+            var CreatedFile = false;
+            _handleSeparationEvents.writeNewEventsToLog(_listSeperationsArgs[0]);
+            using (StreamReader sr = new StreamReader(path + @"\SeparationEvents1.txt"))
+            {
+                string contents = sr.ReadToEnd();
+                if (contents.Contains(_listSeperationsArgs[0].ToString()))
+                {
+                    CreatedFile = true;
+                }
+            }
+            Assert.IsTrue(CreatedFile);
+
         }
-       
+        [Test]
+        public void ConnectToFileLogWrong()
+        {
+            var CreatedFile = false;
+            _handleSeparationEvents.writeNewEventsToLog(_listSeperationsArgs[0]);
+            using (StreamReader sr = new StreamReader(path + @"\SeparationEvents1.txt"))
+            {
+                string contents = sr.ReadToEnd();
+                if (contents.Contains("SomethingWrong"))
+                {
+                    CreatedFile = true;
+                }
+            }
+            Assert.IsFalse(CreatedFile);
+
+        }
+
 
     }
 }

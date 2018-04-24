@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
+using System.IO;
 using System.Text;
 using System.Threading.Tasks;
 using AirTrafficMonitoringLogic;
@@ -28,6 +28,7 @@ namespace AirTrafficMonitoringIntegrationTest
         private int _mEvnetsReceived;
         private List<string> _list;
         private List<Aircraft> _aircraftlist;
+
         
         private List<Aircraft> _testlist;
         private Aircraft _aircraft1;
@@ -43,6 +44,7 @@ namespace AirTrafficMonitoringIntegrationTest
             _monitoringAirSpace= new MonitoringAirSpace(_recieveAircrafts);
             _sepEvent = Substitute.For<CreateSeparationEvents>();
             _monitoringAirSpace.Attach(_sepEvent);
+            
             _testlist = new List<Aircraft>();
             _aircraft1 = new Aircraft("VBF451",67000,28912,7300, DateTime.ParseExact("20180408143814504", "yyyyMMddHHmmssfff", System.Globalization.CultureInfo.InvariantCulture));
             _aircraft2 = new Aircraft("VBF767", 67000, 28912, 7300, DateTime.ParseExact("20180408143814504", "yyyyMMddHHmmssfff", System.Globalization.CultureInfo.InvariantCulture));
@@ -61,5 +63,6 @@ namespace AirTrafficMonitoringIntegrationTest
             _sepEvent.Received().Update(_testlist);
             
         }
+ 
     }
 }
