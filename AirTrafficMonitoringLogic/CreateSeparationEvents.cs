@@ -10,7 +10,7 @@ namespace AirTrafficMonitoringLogic
 {
     
     public delegate void SeparationEventHandler(object sender, SeparationEventArgs se);
-    public class CreateSeparationEvents : IObserver, ISeprationsEvent
+    public class CreateSeparationEvents : IObserver, ISeparationEvent
     {
      
        
@@ -37,7 +37,7 @@ namespace AirTrafficMonitoringLogic
 
         protected virtual void onSeparationEvent(SeparationEventArgs se)
         {
-            var handler = SeprationsEvent;
+            var handler = SeparationsEvent;
             if (se != null)
             {
                 handler(this, se);
@@ -65,6 +65,6 @@ namespace AirTrafficMonitoringLogic
             else return false;
         }
 
-        public event EventHandler<SeparationEventArgs> SeprationsEvent;
+        public event EventHandler<SeparationEventArgs> SeparationsEvent;
     }
 }

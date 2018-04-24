@@ -8,7 +8,7 @@ using AirTrafficMonitoringLogic.Utillity;
 
 namespace AirTrafficMonitoringLogic
 {
-    public class MonitoringAirSpace:SubjectObserver,IMonotoringAirSpapce
+    public class MonitoringAirSpace:SubjectObserver,IMonitoringAirSpace
     {
         private List<Aircraft> localList;
         public MonitoringAirSpace(IRecieveAircrafts _recieveAircrafts)

@@ -7,10 +7,8 @@ using AirTrafficMonitoringLogic.AircraftUtillity;
 
 namespace AirTrafficMonitoringLogic.Interface
 {
-    public interface IHandleSeparationEvents
+    public interface ISeparationEvent
     {
-        void HandleEvents(object sender, SeparationEventArgs se);
-        void updateConsole();
-        void checkForDeactivatedEvents(SeparationEventArgs se);
+        event EventHandler<SeparationEventArgs> SeparationsEvent;
     }
 }

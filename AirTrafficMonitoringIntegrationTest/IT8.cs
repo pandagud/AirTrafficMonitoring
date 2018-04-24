@@ -4,10 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AirTrafficMonitoringLogic.Interface
+namespace AirTrafficMonitoringIntegrationTest
 {
-    public interface IMonotoringAirSpapce
+    class IT8
     {
-        void Monitor(List<Aircraft> data);
     }
 }

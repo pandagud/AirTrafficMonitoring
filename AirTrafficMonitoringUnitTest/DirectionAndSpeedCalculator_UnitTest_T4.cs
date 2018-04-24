@@ -93,7 +93,7 @@ namespace AirTrafficMonitoringUnitTest
         public void CalculateSpeed_SpeedOnlyXCoordinate_100M_S()
         {
             NewListAc[0]._xcoordinate = NewListAc[0]._xcoordinate + 100;
-            _uut.CalculatSpeed(NewListAc);
+            _uut.CalculateSpeed(NewListAc);
             Assert.AreEqual(100, NewListAc[0].Velocity);
         }
 
@@ -102,7 +102,7 @@ namespace AirTrafficMonitoringUnitTest
         {
             NewListAc[0]._xcoordinate = NewListAc[0]._xcoordinate - 100;
             NewListAc[0]._ycoordinate = NewListAc[0]._ycoordinate - 300;
-            _uut.CalculatSpeed(NewListAc);
+            _uut.CalculateSpeed(NewListAc);
             Assert.AreEqual(316, NewListAc[0].Velocity);
         }
 
@@ -112,7 +112,7 @@ namespace AirTrafficMonitoringUnitTest
             NewListAc[0]._xcoordinate = NewListAc[0]._xcoordinate + 150;
             NewListAc[0]._ycoordinate = NewListAc[0]._ycoordinate - 200;
             NewListAc[0]._altitude = NewListAc[0]._altitude + 100;
-            _uut.CalculatSpeed(NewListAc);
+            _uut.CalculateSpeed(NewListAc);
             Assert.AreEqual(269, NewListAc[0].Velocity);
         }
 
@@ -121,7 +121,7 @@ namespace AirTrafficMonitoringUnitTest
         public void CalculateSpeed_SpeedOnlyAltitude_100M_S()
         {
             NewListAc[0]._altitude = NewListAc[0]._altitude + 100;
-            _uut.CalculatSpeed(NewListAc);
+            _uut.CalculateSpeed(NewListAc);
             Assert.AreEqual(100, NewListAc[0].Velocity);
         }
 

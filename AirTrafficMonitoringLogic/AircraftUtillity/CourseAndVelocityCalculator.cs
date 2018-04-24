@@ -27,7 +27,7 @@ namespace AirTrafficMonitoringLogic.AircraftUtillity
             {
                 List<Aircraft> local = new List<Aircraft>(newList);
                 local = SortAircraftList(local);
-                CalculatSpeed(local);
+                CalculateSpeed(local);
                 CalculateDirection(local);
             }
             OldList = newList;
@@ -48,7 +48,7 @@ namespace AirTrafficMonitoringLogic.AircraftUtillity
             return newlist;
         }
 
-        public List<Aircraft> CalculatSpeed(List<Aircraft> newlist)
+        public List<Aircraft> CalculateSpeed(List<Aircraft> newlist)
         {
             for (int i = 0; i < newlist.Count; i++)
             {
