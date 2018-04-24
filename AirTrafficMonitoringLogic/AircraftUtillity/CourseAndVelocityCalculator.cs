@@ -48,6 +48,8 @@ namespace AirTrafficMonitoringLogic.AircraftUtillity
             return newlist;
         }
 
+      
+
         public List<Aircraft> CalculateSpeed(List<Aircraft> newlist)
         {
             for (int i = 0; i < newlist.Count; i++)
