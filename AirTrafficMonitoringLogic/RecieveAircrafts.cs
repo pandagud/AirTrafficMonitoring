@@ -15,19 +15,19 @@ namespace AirTrafficMonitoringLogic
        // private IPrint _print;
         private IAirCraftObjectsUtility _aircraftObjectsUtility;
         public List<Aircraft> ListofAircraftObjects;
-        private CourseAndVelocityCalculator _courseAndVelocityCalculator;
+        private ICourseAndVelocityCalculator _courseAndVelocityCalculator;
 
 
         public bool called = false;
 
 
 
-        public RecieveAircrafts(ITransponderReceiver receiver,IAirCraftObjectsUtility aircraftObjectsUtility)
+        public RecieveAircrafts(ITransponderReceiver receiver,IAirCraftObjectsUtility aircraftObjectsUtility,ICourseAndVelocityCalculator courseAndVelocityCalculator)
         {
 
            //_print = print;
             _aircraftObjectsUtility = aircraftObjectsUtility;
-            _courseAndVelocityCalculator = new CourseAndVelocityCalculator();
+            _courseAndVelocityCalculator = courseAndVelocityCalculator;
 
             receiver.TransponderDataReady += MyReceiver_TransportData;
         }

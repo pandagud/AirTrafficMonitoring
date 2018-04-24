@@ -7,9 +7,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AirTrafficMonitoringDisplay
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AirTrafficMonitoringLogic", "AirTrafficMonitoringLogic\AirTrafficMonitoringLogic.csproj", "{9F60681E-87F0-4D72-833A-18F543A28258}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AirTrafficMonitoringUnitTest", "AirTrafficMonitoringUnitTest\AirTrafficMonitoringUnitTest.csproj", "{8C82C24F-7116-4EB9-8452-E660BECB8E05}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AirTrafficMonitoring.UnitTest", "AirTrafficMonitoringUnitTest\AirTrafficMonitoring.UnitTest.csproj", "{8C82C24F-7116-4EB9-8452-E660BECB8E05}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AirTrafficMonitoringIntegrationTest", "AirTrafficMonitoringIntegrationTest\AirTrafficMonitoringIntegrationTest.csproj", "{90697A89-3264-4F29-8EC2-C8922CDCA386}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AirTrafficMonitoring.IntegrationTest", "AirTrafficMonitoringIntegrationTest\AirTrafficMonitoring.IntegrationTest.csproj", "{90697A89-3264-4F29-8EC2-C8922CDCA386}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

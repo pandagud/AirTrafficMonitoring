@@ -13,7 +13,7 @@ namespace AirTrafficMonitoringLogic
         public List<Aircraft> getListofAircraftObjects(List<string> data)
         {
             
-            aircrafts = new List<Aircraft>();
+            aircrafts = new List<Aircraft>();  
             
              for (int i = 0; i < data.Count; i++)
              {

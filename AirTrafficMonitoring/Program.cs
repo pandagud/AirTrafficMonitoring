@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using AirTrafficMonitoringLogic;
+using AirTrafficMonitoringLogic.AircraftUtillity;
 using AirTrafficMonitoringLogic.Interface;
 
 namespace AirTrafficMonitoring
@@ -21,7 +22,8 @@ namespace AirTrafficMonitoring
             var myReciever = TransponderReceiver.TransponderReceiverFactory.CreateTransponderDataReceiver();
             
             AircraftObjectsUtility _aircraftObjectsUtility = new AircraftObjectsUtility();
-            IRecieveAircrafts recieveAircrafts = new RecieveAircrafts(myReciever, _aircraftObjectsUtility);
+            ICourseAndVelocityCalculator _courseAndVelocityCalculator = new CourseAndVelocityCalculator();
+            IRecieveAircrafts recieveAircrafts = new RecieveAircrafts(myReciever, _aircraftObjectsUtility, _courseAndVelocityCalculator);
 
             IObserver _print = new Print(recieveAircrafts);
             MonitoringAirSpace _monitoringAirSpace = new MonitoringAirSpace(recieveAircrafts);
