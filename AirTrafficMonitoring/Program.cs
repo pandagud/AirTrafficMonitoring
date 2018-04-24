@@ -31,8 +31,9 @@ namespace AirTrafficMonitoring
             CreateSeparationEvents _cse = new CreateSeparationEvents();
             _monitoringAirSpace.Attach(_cse);
             IToLogFile file = new SeparationEventToFileLog();
-            HandleSeparationEvents hse = new HandleSeparationEvents(_cse, file);
             
+            HandleSeparationEvents hse = new HandleSeparationEvents(_cse, file);
+            _cse.Attach(hse);
             Console.ReadLine();
 
         }

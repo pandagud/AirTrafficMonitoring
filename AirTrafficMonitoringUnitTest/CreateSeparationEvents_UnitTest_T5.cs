@@ -50,22 +50,25 @@ namespace AirTrafficMonitoringUnitTest
             AircraftList.Add(_testAircraft1);
             AircraftList.Add(_testAircraft2);
             
-            _nEventsReceived = 0;
             List<Aircraft>_aircraftlist = new List<Aircraft>();
-               _nEventsReceived = 0;
-            _mEventsReceived = 0;
                 
                 
             _uut = new CreateSeparationEvents();
-     
+            
 
-            _uut.SeparationsEvent += (o, args) =>
-            {
-                _sum = args.getTags();
-                _date = args.getTime();
-                _aircraftlist = AircraftList;
-                _nEventsReceived++;
-            };
+        }
+        //public class TestClass : IObserverSepArgs
+        //{
+        //    List<SeparationEventArgs> testList 
+        //    public void Update(List<SeparationEventArgs> s)
+        //    {
+                
+        //    }
+        //}
+
+        [Test]
+        public void Update_CheckListForSepEvents()
+        {
 
         }
 
@@ -74,22 +77,14 @@ namespace AirTrafficMonitoringUnitTest
         {
             _uut.Update(AircraftList);
 
-            Assert.AreEqual("ATR424 ATR423", _sum);
+            Assert.AreEqual("ATR424 ATR423", _uut.listOfCurrentSeparationEvents[0].getTags());
         }
         [Test]
         public void Update_CheckSeparationEventArgsDate()
         {
             _uut.Update(AircraftList);
             DateTime obj = DateTime.Parse("2015-10-06 21:34:56.789");
-            Assert.AreEqual(obj, _date);
-        }
-
-        [Test]
-        public void Update_with_separationEvent_CheckIfEventIsCreated()
-        {
-            _uut.Update(AircraftList);
-
-            Assert.AreEqual(1, _nEventsReceived);
+            Assert.AreEqual(obj, _uut.listOfCurrentSeparationEvents[0].getTime());
         }
        
         [Test]
@@ -118,12 +113,6 @@ namespace AirTrafficMonitoringUnitTest
         public void CreateSeparationEvents_CheckHorizontalSeparation_onBoundary_5001_false()
         {
             Assert.AreEqual(false, _uut.checkHorizontalSeparation(_testAircraft1, _testAircraft3));
-        }
-
-        [Test]
-        public void CreateSeparationEvents_onSeparationEvent()
-        {
-            
         }
     }
 }

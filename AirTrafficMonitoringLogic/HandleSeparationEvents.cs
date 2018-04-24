@@ -8,41 +8,18 @@ using AirTrafficMonitoringLogic.Interface;
 
 namespace AirTrafficMonitoringLogic
 {
-    public class HandleSeparationEvents:IHandleSeparationEvents
+    public class HandleSeparationEvents:IHandleSeparationEvents, IObserverSepArgs
     {
         
         public List<SeparationEventArgs> listOfCurrentSeparationEvents;
+        public List<SeparationEventArgs> listOfOldSeparationEvents;
         private IToLogFile _itlFile;
         public HandleSeparationEvents(ISeparationEvent cse, IToLogFile itlFile)
         {
             listOfCurrentSeparationEvents = new List<SeparationEventArgs>();
-            cse.SeparationsEvent += HandleEvents;
+            listOfOldSeparationEvents = new List<SeparationEventArgs>();
             _itlFile = itlFile;
 
-        }
-
-        public void HandleEvents(object sender, SeparationEventArgs se)
-        { // tilføj til liste af eventArgs, hvis det ikke er på listen i forvejen, hvis det ikke er på listen i forvejen udskrives det.
-            //lav noget der viser de events der ligger i listen på console
-            //if (listOfCurrentSeparationEvents.Exists(se.getTags()) == true ) ;
-            //If løkke der løber igennem listen og ser om se findes i den i forvejen - med de to tags,
-            bool boaksd = false;
-            for (int i = 0; i < listOfCurrentSeparationEvents.Count; i++)
-            {
-                if (listOfCurrentSeparationEvents[i].getTags() == se.getTags())
-                {
-                    boaksd = true;
-                    listOfCurrentSeparationEvents[i] = se;
-                }
-            }
-
-            if (boaksd == false)
-            {
-                listOfCurrentSeparationEvents.Add(se);
-                writeNewEventsToLog(se);
-            }
-            updateConsole();
-            checkForDeactivatedEvents(se);
         }
 
         public void writeNewEventsToLog(SeparationEventArgs se)
@@ -59,21 +36,60 @@ namespace AirTrafficMonitoringLogic
             }
         }
 
-        public void checkForDeactivatedEvents(SeparationEventArgs se)
+        public void checkForDeactivatedEvents(List<SeparationEventArgs> s)
         {
-            for (int i = 0; i < listOfCurrentSeparationEvents.Count; i++)
+            foreach (var t in listOfOldSeparationEvents)
             {
-                if (listOfCurrentSeparationEvents[i].getTime().AddSeconds(5) < DateTime.Now )
+                bool b = false;
+                foreach (var t1 in listOfCurrentSeparationEvents)
                 {
-                    _itlFile.writeDoneEventToFile(listOfCurrentSeparationEvents[i].getTags(),listOfCurrentSeparationEvents[i].getTime().ToString());
-                    listOfCurrentSeparationEvents.RemoveAt(i);
-                    
+                    if (t.getTags() == t1.getTags())
+                    {
+                        b = true;
+                    }
                 }
-                
+
+                if (b = false)
+                {
+                    _itlFile.writeDoneEventToFile(t.getTags(), t.getTime().ToString()); 
+                }
             }
         }
 
+        public void checkForNewEvents(List<SeparationEventArgs> s)
+        {
+            foreach (var t in listOfCurrentSeparationEvents)
+            {
+                bool b = false;
+                foreach (var t1 in listOfOldSeparationEvents)
+                {
+                    if (t.getTags() == t1.getTags())
+                    {
+                        b = true;
+                    }
+                }
 
+                if (b = false)
+                {
+                    _itlFile.writeNewEventToFile(t.getTags(), t.getTime().ToString());
+                }
+            }
+        }
 
+        public void Update(List<SeparationEventArgs> s)
+        {
+            if (listOfOldSeparationEvents.Count == 0)
+            {
+                listOfOldSeparationEvents = new List<SeparationEventArgs>(s);
+            }
+            listOfCurrentSeparationEvents = new List<SeparationEventArgs>(s);
+
+            checkForDeactivatedEvents(listOfCurrentSeparationEvents);
+            checkForNewEvents(listOfCurrentSeparationEvents);
+            foreach (var SepEvent in listOfCurrentSeparationEvents)
+            {
+                Console.WriteLine(SepEvent.ToString());
+            }
+        }
     }
 }
