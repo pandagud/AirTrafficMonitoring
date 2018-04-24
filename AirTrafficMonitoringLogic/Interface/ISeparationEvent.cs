@@ -9,6 +9,11 @@ namespace AirTrafficMonitoringLogic.Interface
 {
     public interface ISeparationEvent
     {
-       
+        void Update(List<Aircraft> s);
+        bool checkHorizontalSeparation(Aircraft s, Aircraft s1);
+
+        bool checkAltitude(Aircraft s, Aircraft s1);
+
+
     }
 }

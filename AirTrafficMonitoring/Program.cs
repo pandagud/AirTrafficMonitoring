@@ -25,14 +25,14 @@ namespace AirTrafficMonitoring
             ICourseAndVelocityCalculator _courseAndVelocityCalculator = new CourseAndVelocityCalculator();
             IRecieveAircrafts recieveAircrafts = new RecieveAircrafts(myReciever, _aircraftObjectsUtility, _courseAndVelocityCalculator);
 
-            IObserver _print = new Print(recieveAircrafts);
+            IObserver _print = new Print();
             MonitoringAirSpace _monitoringAirSpace = new MonitoringAirSpace(recieveAircrafts);
             _monitoringAirSpace.Attach(_print);
             CreateSeparationEvents _cse = new CreateSeparationEvents();
             _monitoringAirSpace.Attach(_cse);
             IToLogFile file = new SeparationEventToFileLog();
-            
-            HandleSeparationEvents hse = new HandleSeparationEvents(_cse, file);
+            IPrint _print2 = new Print();
+            HandleSeparationEvents hse = new HandleSeparationEvents(_cse, file, _print2);
             _cse.Attach(hse);
             Console.ReadLine();
 

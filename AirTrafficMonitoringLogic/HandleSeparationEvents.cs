@@ -13,11 +13,13 @@ namespace AirTrafficMonitoringLogic
         
         public List<SeparationEventArgs> listOfCurrentSeparationEvents;
         public List<SeparationEventArgs> listOfOldSeparationEvents;
+        public IPrint _Print;
         private IToLogFile _itlFile;
-        public HandleSeparationEvents(ISeparationEvent cse, IToLogFile itlFile)
+        public HandleSeparationEvents(ISeparationEvent cse, IToLogFile itlFile,IPrint print)
         {
             listOfCurrentSeparationEvents = new List<SeparationEventArgs>();
             listOfOldSeparationEvents = new List<SeparationEventArgs>();
+            _Print = print;
             _itlFile = itlFile;
 
         }
@@ -88,7 +90,7 @@ namespace AirTrafficMonitoringLogic
             checkForNewEvents(listOfCurrentSeparationEvents);
             foreach (var SepEvent in listOfCurrentSeparationEvents)
             {
-                Console.WriteLine(SepEvent.ToString());
+                _Print.PrintData(SepEvent);
             }
         }
     }

@@ -22,13 +22,15 @@ namespace AirTrafficMonitoringUnitTest
         private SeparationEventArgs se2;
         private SeparationEventArgs se3;
         private HandleSeparationEvents _uut;
+        private IPrint _print;
         [SetUp]
         public void SetUp()
         {
+            _print = Substitute.For<IPrint>();
             se1 = new SeparationEventArgs(DateTime.Now, "testflight1", "testflight2");
             se2 = new SeparationEventArgs(DateTime.Now, "testflight3", "testflight4");
             se3 = new SeparationEventArgs(DateTime.Now, "testflight4", "testflight5");
-            _uut = new HandleSeparationEvents(_iseSeparationEvent, _itToLogFile);
+            _uut = new HandleSeparationEvents(_iseSeparationEvent, _itToLogFile, _print);
             SeList.Add(se1);
             SeList.Add(se2);
             SeList.Add(se3);

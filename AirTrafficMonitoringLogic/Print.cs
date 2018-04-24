@@ -4,26 +4,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using AirTrafficMonitoringLogic;
+using AirTrafficMonitoringLogic.AircraftUtillity;
 using AirTrafficMonitoringLogic.Interface;
 
 namespace AirTrafficMonitoringLogic
 {
     public class Print:IPrint,IObserver
     {
-        public Print(IRecieveAircrafts IRA)
-        {
-            //IRA.TransponderDataObjectReady += PrintData; ;
-            
-        }
 
 
-        public void PrintData(List<Aircraft> data)
+        public void PrintData(SeparationEventArgs data)
         {
-            //Console.Clear();
-            //foreach (var e in data)
-            //{
-            //    Console.WriteLine(e.ToString());
-            //}
+            Console.WriteLine(data.ToString());
         }
 
         public void Update(List<Aircraft> s)
