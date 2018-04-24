@@ -27,7 +27,7 @@ namespace AirTrafficMonitoringIntegrationTest
         public void SetUp()
         {
             _print = new Print();
-            _iToLogFile = new SeparationEventToFileLog();
+            _iToLogFile = Substitute.For<IToLogFile>();
             _separationEvent = new CreateSeparationEvents();
             _handleSeparationEvents = new HandleSeparationEvents(_separationEvent, _iToLogFile, _print);
 
@@ -40,7 +40,7 @@ namespace AirTrafficMonitoringIntegrationTest
         [Test]
         public void ConnectToPrint()
         {
-            _handleSeparationEvents.checkForNewEvents(_listSeperationsArgs);
+            _handleSeparationEvents.Update(_listSeperationsArgs);
             // Check Connect how?
         }
 
