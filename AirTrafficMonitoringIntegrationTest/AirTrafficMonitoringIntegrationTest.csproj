@@ -61,7 +61,7 @@
   <ItemGroup>
     <Compile Include="Class1.cs" />
     <Compile Include="IT1_AircraftObjectsUtility.cs" />
-    <Compile Include="IT2_RecieveAircraftsToDirectionAndSpeedCalculator.cs" />
+    <Compile Include="IT2_DirectionAndSpeedCalculatorToRecieveAircrafts.cs" />
     <Compile Include="IT3.cs" />
     <Compile Include="IT4.cs" />
     <Compile Include="IT5.cs" />
