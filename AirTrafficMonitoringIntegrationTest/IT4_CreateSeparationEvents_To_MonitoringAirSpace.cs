@@ -55,9 +55,34 @@ namespace AirTrafficMonitoringIntegrationTest
             
 
             _RecieveAircrafts.UpdateTransponderData(args);
+            // What we wanted to do was: 
+            // Assert.AreEqual(TestList[0], _SeparationEvent.listOfCurrentSeparationEvents[0]);
+            // But since we ran into some troubles comparing two objects in our lists(reference problems) we talked to Frank and said he suggested we could do it by its values. 
+            Assert.AreEqual(TestList[0].ToString(), _SeparationEvent.listOfCurrentSeparationEvents[0].ToString());
+        }
+        [Test]
+        public void IsCorrectInfoPassedOn_ComparingTags()
+        {
+            var args = new RawTransponderDataEventArgs(new List<string> { "VBF451;85000;28912;7300;20180408143814504", "VBF461;84000;28902;7300;20180408143814504" });
 
-            Assert.AreEqual(TestList[0],_SeparationEvent.listOfCurrentSeparationEvents[0]);
-            //_handleSeparationEvents.Received().Update(TestList);
+
+            _RecieveAircrafts.UpdateTransponderData(args);
+            // What we wanted to do was: 
+            // Assert.AreEqual(TestList[0], _SeparationEvent.listOfCurrentSeparationEvents[0]);
+            // But since we ran into some troubles comparing two objects in our lists(reference problems) we talked to Frank and said he suggested we could do it by its values. 
+            Assert.AreEqual(TestList[0].getTags(), _SeparationEvent.listOfCurrentSeparationEvents[0].getTags());
+        }
+        [Test]
+        public void IsCorrectInfoPassedOn_ComparingTime()
+        {
+            var args = new RawTransponderDataEventArgs(new List<string> { "VBF451;85000;28912;7300;20180408143814504", "VBF461;84000;28902;7300;20180408143814504" });
+
+
+            _RecieveAircrafts.UpdateTransponderData(args);
+            // What we wanted to do was: 
+            // Assert.AreEqual(TestList[0], _SeparationEvent.listOfCurrentSeparationEvents[0]);
+            // But since we ran into some troubles comparing two objects in our lists(reference problems) we talked to Frank and said he suggested we could do it by its values. 
+            Assert.AreEqual(TestList[0].getTime(), _SeparationEvent.listOfCurrentSeparationEvents[0].getTime());
         }
     }
 }
