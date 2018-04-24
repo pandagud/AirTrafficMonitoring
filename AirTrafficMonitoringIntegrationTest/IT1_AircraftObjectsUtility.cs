@@ -41,6 +41,7 @@ namespace AirTrafficMonitoringIntegrationTest
         {
             var args = new RawTransponderDataEventArgs(new List<string> { "VBF451;94717;28912;7300;20180408143814504" });
             _recieveAircrafts.UpdateTransponderData(args);
+            
             Assert.AreEqual(_recieveAircrafts.ListofAircraftObjects[0]._tag, "VBF451");
            
         }
