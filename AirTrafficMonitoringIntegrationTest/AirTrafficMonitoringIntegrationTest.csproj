@@ -61,7 +61,7 @@
   <ItemGroup>
     <Compile Include="Class1.cs" />
     <Compile Include="IT1_AircraftObjectsUtility.cs" />
-    <Compile Include="IT2.cs" />
+    <Compile Include="IT2_RecieveAircraftsToDirectionAndSpeedCalculator.cs" />
     <Compile Include="IT3.cs" />
     <Compile Include="IT4.cs" />
     <Compile Include="IT5.cs" />
@@ -81,6 +81,9 @@
       <Project>{9f60681e-87f0-4d72-833a-18f543a28258}</Project>
       <Name>AirTrafficMonitoringLogic</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
