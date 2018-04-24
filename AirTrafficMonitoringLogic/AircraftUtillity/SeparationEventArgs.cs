@@ -7,7 +7,7 @@ using AirTrafficMonitoringLogic.Interface;
 
 namespace AirTrafficMonitoringLogic.AircraftUtillity
 {
-    public class SeparationEventArgs : EventArgs
+    public class SeparationEventArgs
     {
         private DateTime _separationEventTime;
         private string _tag1;
