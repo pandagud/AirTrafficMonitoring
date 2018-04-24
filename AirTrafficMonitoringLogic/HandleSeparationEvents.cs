@@ -29,14 +29,7 @@ namespace AirTrafficMonitoringLogic
             _itlFile.writeNewEventToFile(se.getTags(), se.getTime().ToString());
         }
 
-        public void updateConsole()
-        {
-            for (int i = 0; i < listOfCurrentSeparationEvents.Count; i++)
-            {
-                //Console.Clear();
-                Console.WriteLine(listOfCurrentSeparationEvents[i].ToString());
-            }
-        }
+    
 
         public void checkForDeactivatedEvents(List<SeparationEventArgs> s)
         {
