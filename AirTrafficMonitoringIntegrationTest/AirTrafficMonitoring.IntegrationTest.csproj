@@ -59,13 +59,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
+    <Compile Include="IT6_HandleSeparationEvents_To_Print.cs" />
     <Compile Include="IT1_AircraftObjectsUtility.cs" />
     <Compile Include="IT2_DirectionAndSpeedCalculatorToRecieveAircrafts.cs" />
     <Compile Include="IT3_MonitoringToRecieveAircrafts.cs" />
     <Compile Include="IT4_CreateSeparationEvents_To_MonitoringAirSpace.cs" />
     <Compile Include="IT5_CreateSeparationEvent_To_HandleSeparationEvents.cs" />
-    <Compile Include="IT8.cs" />
+    <Compile Include="IT7_HandleSeparationEvents_To_SeparationEventToFileLog.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
