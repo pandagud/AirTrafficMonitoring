@@ -30,11 +30,11 @@ namespace AirTrafficMonitoringIntegrationTest
         [SetUp]
         public void Setup()
         {
-            _airCraftObjectsUtility = new AircraftObjectsUtility();
-            _recieveAircrafts = new RecieveAircrafts(_receiver, _airCraftObjectsUtility);
-            _monitoringAirSpace= new MonitoringAirSpace(_recieveAircrafts);
             _courseAndVelocityCalculator = new CourseAndVelocityCalculator();
-            _observer = new SubjectObserver();
+            _airCraftObjectsUtility = new AircraftObjectsUtility();
+            _recieveAircrafts = new RecieveAircrafts(_receiver, _airCraftObjectsUtility, _courseAndVelocityCalculator);
+            _monitoringAirSpace= new MonitoringAirSpace(_recieveAircrafts);
+            
             
 
 
@@ -62,7 +62,7 @@ namespace AirTrafficMonitoringIntegrationTest
             var args = new RawTransponderDataEventArgs(new List<string> { "VBF451;67000;28912;7300;20180408143814504" });
             _recieveAircrafts.UpdateTransponderData(args);
             //_receiver.TransponderDataReady += Raise.EventWith(args);
-            Assert.That();
+           
         }
     }
 }
