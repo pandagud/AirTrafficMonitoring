@@ -3,16 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AirTrafficMonitoringLogic.Interface;
 
 namespace AirTrafficMonitoringLogic.AircraftUtillity
 {
-    public class DirectionAndSpeedCalculator
+    public class CourseAndVelocityCalculator: ICourseAndVelocityCalculator
     {
         public List<Aircraft> OldList;
         public List<Aircraft> CurrentList;
         
 
-        public DirectionAndSpeedCalculator()
+        public CourseAndVelocityCalculator()
         {
             OldList = new List<Aircraft>();
             CurrentList = new List<Aircraft>();

@@ -45,11 +45,12 @@
   <ItemGroup>
     <Compile Include="Aircraft.cs" />
     <Compile Include="AircraftUtillity\AircraftObjectsUtility.cs" />
-    <Compile Include="AircraftUtillity\DirectionAndSpeedCalculator.cs" />
+    <Compile Include="AircraftUtillity\CourseAndVelocityCalculator.cs" />
     <Compile Include="AircraftUtillity\SeparationEventArgs.cs" />
     <Compile Include="CreateSeparationEvents.cs" />
     <Compile Include="HandleSeparationEvents.cs" />
     <Compile Include="Interface\IAirCraftObjectsUtility.cs" />
+    <Compile Include="Interface\ICourseAndVelocityCalculator.cs" />
     <Compile Include="Interface\IHandleSeparationEvents.cs" />
     <Compile Include="Interface\IMonotoringAirSpapce.cs" />
     <Compile Include="Interface\IObserver.cs" />

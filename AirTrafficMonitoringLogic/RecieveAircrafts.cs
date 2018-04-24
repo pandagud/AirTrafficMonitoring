@@ -15,7 +15,7 @@ namespace AirTrafficMonitoringLogic
        // private IPrint _print;
         private IAirCraftObjectsUtility _aircraftObjectsUtility;
         public List<Aircraft> ListofAircraftObjects;
-        private DirectionAndSpeedCalculator _directionAndSpeedCalculator;
+        private CourseAndVelocityCalculator _courseAndVelocityCalculator;
 
 
         public bool called = false;
@@ -27,7 +27,7 @@ namespace AirTrafficMonitoringLogic
 
            //_print = print;
             _aircraftObjectsUtility = aircraftObjectsUtility;
-            _directionAndSpeedCalculator = new DirectionAndSpeedCalculator();
+            _courseAndVelocityCalculator = new CourseAndVelocityCalculator();
 
             receiver.TransponderDataReady += MyReceiver_TransportData;
         }
@@ -45,7 +45,7 @@ namespace AirTrafficMonitoringLogic
             called = true;
 
             ListofAircraftObjects = _aircraftObjectsUtility.getListofAircraftObjects(data.TransponderData);
-           _directionAndSpeedCalculator.CalculateBoth(ListofAircraftObjects);
+           _courseAndVelocityCalculator.CalculateBoth(ListofAircraftObjects);
             var handler = TransponderDataObjectReady;
             handler?.Invoke(ListofAircraftObjects);
             

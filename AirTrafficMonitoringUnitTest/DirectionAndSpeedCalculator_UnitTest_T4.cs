@@ -15,12 +15,12 @@ namespace AirTrafficMonitoringUnitTest
         private List<Aircraft> NewListAc;
         private List<Aircraft> OldListAc;
         private List<Aircraft> SecondNewListAc;
-        private DirectionAndSpeedCalculator _uut;
+        private CourseAndVelocityCalculator _uut;
 
         [SetUp]
         public void SetUp()
         {
-            _uut = new DirectionAndSpeedCalculator();
+            _uut = new CourseAndVelocityCalculator();
             ac = new Aircraft("Test",15000,15000,5000,DateTime.Now.AddSeconds(1));
             ac1 = new Aircraft("Test2",15100,14900,5100,DateTime.Now);
             ac2 = new Aircraft("Test",15000,15000,5000,DateTime.Now);
