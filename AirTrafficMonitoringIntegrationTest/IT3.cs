@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using AirTrafficMonitoringLogic;
 using AirTrafficMonitoringLogic.AircraftUtillity;
 using AirTrafficMonitoringLogic.Interface;
+using AirTrafficMonitoringLogic.Utillity;
 using NUnit.Framework;
 using NSubstitute;
 using TransponderReceiver;
@@ -16,9 +17,10 @@ namespace AirTrafficMonitoringIntegrationTest
     public class IT3
     {
         private IAirCraftObjectsUtility _airCraftObjectsUtility;
-        private IRecieveAircrafts _recieveAircrafts;
+        private RecieveAircrafts _recieveAircrafts;
         private IMonitoringAirSpace _monitoringAirSpace;
         private ICourseAndVelocityCalculator _courseAndVelocityCalculator;
+        private SubjectObserver _observer;
         private ITransponderReceiver _receiver;
         private int _nEventsReceived;
         private int _mEvnetsReceived;
@@ -32,6 +34,7 @@ namespace AirTrafficMonitoringIntegrationTest
             _recieveAircrafts = new RecieveAircrafts(_receiver, _airCraftObjectsUtility);
             _monitoringAirSpace= new MonitoringAirSpace(_recieveAircrafts);
             _courseAndVelocityCalculator = new CourseAndVelocityCalculator();
+            _observer = new SubjectObserver();
             
 
 
@@ -57,8 +60,9 @@ namespace AirTrafficMonitoringIntegrationTest
         public void MonitoringAirSpace_Test_of_Update_And_retun_of_list()
         {
             var args = new RawTransponderDataEventArgs(new List<string> { "VBF451;67000;28912;7300;20180408143814504" });
-            _receiver.TransponderDataReady += Raise.EventWith(args);
-            Assert.That(_monitoringAirSpace.Monitor());
+            _recieveAircrafts.UpdateTransponderData(args);
+            //_receiver.TransponderDataReady += Raise.EventWith(args);
+            Assert.That();
         }
     }
 }
