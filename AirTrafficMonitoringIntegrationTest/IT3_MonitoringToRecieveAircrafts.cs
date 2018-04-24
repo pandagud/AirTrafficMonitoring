@@ -28,8 +28,10 @@ namespace AirTrafficMonitoringIntegrationTest
         private int _mEvnetsReceived;
         private List<string> _list;
         private List<Aircraft> _aircraftlist;
-        private Aircraft _aircraft;
-        private List<Aircraft> _aircraftlist1;
+        
+        private List<Aircraft> _testlist;
+        private Aircraft _aircraft1;
+        private Aircraft _aircraft2;
 
         [SetUp]
         public void Setup()
@@ -41,22 +43,23 @@ namespace AirTrafficMonitoringIntegrationTest
             _monitoringAirSpace= new MonitoringAirSpace(_recieveAircrafts);
             _sepEvent = Substitute.For<CreateSeparationEvents>();
             _monitoringAirSpace.Attach(_sepEvent);
-            
+            _testlist = new List<Aircraft>();
+            _aircraft1 = new Aircraft("VBF451",67000,28912,7300, DateTime.ParseExact("20180408143814504", "yyyyMMddHHmmssfff", System.Globalization.CultureInfo.InvariantCulture));
+            _aircraft2 = new Aircraft("VBF767", 67000, 28912, 7300, DateTime.ParseExact("20180408143814504", "yyyyMMddHHmmssfff", System.Globalization.CultureInfo.InvariantCulture));
+            _testlist.Add(_aircraft1);
+            _testlist.Add(_aircraft2);
+
         }
 
         [Test]
         public void MonitoringAirSpace_Test_of_Monitor_Iscalled()
         {
             var args = new RawTransponderDataEventArgs(new List<string> { "VBF451;67000;28912;7300;20180408143814504" });
-            var args1 = new RawTransponderDataEventArgs(new List<string> { "VBF451;67000;28912;7300;20180408143814504" });
+            var args1 = new RawTransponderDataEventArgs(new List<string> { "VBF767;67000;28912;7300;20180408143814504" });
             _recieveAircrafts.UpdateTransponderData(args);
             _recieveAircrafts.UpdateTransponderData(args1);
-
-            //_sepEvent.Received().Update();
+            _sepEvent.Received().Update(_testlist);
             
-            _recieveAircrafts.UpdateTransponderData(args);
-            //_receiver.TransponderDataReady += Raise.EventWith(args);
-            //Assert.That(_monitoringAirSpace.Monitor
         }
     }
 }

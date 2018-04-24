@@ -14,7 +14,7 @@ using TransponderReceiver;
 namespace AirTrafficMonitoringIntegrationTest
 {
     [TestFixture]
-    class IT5_CreateSeparationEvents
+    class IT4_CreateSeparationEvents_To_MonitoringAirSpace
     {
         private CreateSeparationEvents _SeparationEvent;
         private RecieveAircrafts _RecieveAircrafts;
