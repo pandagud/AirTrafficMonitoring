@@ -58,8 +58,7 @@ namespace AirTrafficMonitoringIntegrationTest
         [Test]
         public void itOfHandleEvents()
         {
-            var args = new RawTransponderDataEventArgs(new List<string> { "VBF451;85000;28912;7300;20180408143814504", "VBF461;84000;28902;7300;20180408143814504" });
-
+           
             _SeparationEvent.Update(_listaircraft);
             _iPrint.Received().PrintData(_handleSeparationEvents.listOfCurrentSeparationEvents[0]);
 
