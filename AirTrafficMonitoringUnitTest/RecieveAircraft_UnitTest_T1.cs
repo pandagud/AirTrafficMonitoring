@@ -24,6 +24,7 @@ namespace AirTrafficMonitoringUnitTest
         private IPrint _print;
         private IAirCraftObjectsUtility _airCraftObjectsUtility;
         private IAirCraftObjectsUtility _realAirCraftObjectsUtility;
+        private ICourseAndVelocityCalculator _courseAndVelocityCalculator;
 
 
 
@@ -33,8 +34,9 @@ namespace AirTrafficMonitoringUnitTest
             _realAirCraftObjectsUtility = new AircraftObjectsUtility();
             _airCraftObjectsUtility = Substitute.For<IAirCraftObjectsUtility>();
             _receiver = Substitute.For<ITransponderReceiver>();
+            _courseAndVelocityCalculator = Substitute.For<ICourseAndVelocityCalculator>();
             _print = Substitute.For<IPrint>();
-            _uut = new RecieveAircrafts(_receiver, _airCraftObjectsUtility);
+            _uut = new RecieveAircrafts(_receiver, _airCraftObjectsUtility, _courseAndVelocityCalculator);
             _aircraftlist = new List<Aircraft>();
             _list = new List<string>();
 
