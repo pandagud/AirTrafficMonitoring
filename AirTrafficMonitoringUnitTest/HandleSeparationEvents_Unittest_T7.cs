@@ -17,44 +17,58 @@ namespace AirTrafficMonitoringUnitTest
     {
         IToLogFile _itToLogFile = Substitute.For<IToLogFile>();
         ISeparationEvent _iseSeparationEvent = Substitute.For<ISeparationEvent>();
+        private List<SeparationEventArgs> SeList = new List<SeparationEventArgs>();
+        private SeparationEventArgs se1;
+        private SeparationEventArgs se2;
+        private SeparationEventArgs se3;
         private HandleSeparationEvents _uut;
         [SetUp]
         public void SetUp()
         {
+            se1 = new SeparationEventArgs(DateTime.Now, "testflight1", "testflight2");
+            se2 = new SeparationEventArgs(DateTime.Now, "testflight3", "testflight4");
+            se3 = new SeparationEventArgs(DateTime.Now, "testflight4", "testflight5");
             _uut = new HandleSeparationEvents(_iseSeparationEvent, _itToLogFile);
-            
+            SeList.Add(se1);
+            SeList.Add(se2);
+            _uut.Update(SeList);
 
         }
-        
 
         [Test]
-        public void HandleEvents_gettingNewEvent()
+        public void HandleEvents_NewEventRecieved()
         {
-            //var args = new SeparationEventArgs(DateTime.Now, "fly1", "fly2");
-            //_iseSeparationEvent.SeparationsEvent += Raise.EventWith(args);
-            //Assert.AreEqual(_uut.listOfCurrentSeparationEvents[0],args);
+            Assert.AreEqual(_uut.listOfCurrentSeparationEvents,SeList);
         }
+        [Test]
+        public void HandleEvents_CheckForNewEvent()
+        {
+            se3 = new SeparationEventArgs(DateTime.Now, "testflight4", "testflight5");
+            SeList.Add(se3);
+            _uut.Update(SeList);
+            Assert.AreEqual(_uut.listOfCurrentSeparationEvents,SeList);
+        }
+
+
 
         [Test]
         public void HandleEvents_UpdatingExistingEvent()
         {
-            //var args1 = new SeparationEventArgs(DateTime.Now, "fly1", "fly2");
-            //_iseSeparationEvent.SeparationsEvent += Raise.EventWith(args1);
-            //var args2 = new SeparationEventArgs(DateTime.Now.AddHours(1), "fly1", "fly2");
-            //_iseSeparationEvent.SeparationsEvent += Raise.EventWith(args2);
-            //Assert.AreEqual(_uut.listOfCurrentSeparationEvents[0], args2);
+            se3 = new SeparationEventArgs(DateTime.Now.AddMinutes(5), "testflight4", "testflight5");
+            SeList.Add(se3);
+            _uut.Update(SeList);
+            Assert.AreEqual(_uut.listOfCurrentSeparationEvents[2],se3);
         }
 
         [Test]
         public void CheckforDeactivatedEvents()
         {
-            //var args1 = new SeparationEventArgs(DateTime.Now, "fly1", "fly2");
-            //_iseSeparationEvent.SeparationsEvent += Raise.EventWith(args1);
-            //Thread.Sleep(10000);
-            //var args2 = new SeparationEventArgs(DateTime.Now, "fly2", "fly3");
-            //_iseSeparationEvent.SeparationsEvent += Raise.EventWith(args2);
-            //Assert.AreEqual(_uut.listOfCurrentSeparationEvents[0], args2);
+            SeList.RemoveAt(1);
+            _uut.Update(SeList);
+            Assert.AreEqual(SeList,_uut.listOfCurrentSeparationEvents);
+
         }
+
 
 
 
