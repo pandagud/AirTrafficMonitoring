@@ -64,7 +64,7 @@
     <Compile Include="IT2_DirectionAndSpeedCalculatorToRecieveAircrafts.cs" />
     <Compile Include="IT3_MonitoringToRecieveAircrafts.cs" />
     <Compile Include="IT4_CreateSeparationEvents_To_MonitoringAirSpace.cs" />
-    <Compile Include="IT5_HandleSeparationEvent_To_CreateSeparationEvent.cs" />
+    <Compile Include="IT5_CreateSeparationEvent_To_HandleSeparationEvents.cs" />
     <Compile Include="IT8.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
