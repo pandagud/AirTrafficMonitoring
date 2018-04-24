@@ -44,19 +44,19 @@ namespace AirTrafficMonitoringIntegrationTest
 
             
             TestList = new List<SeparationEventArgs>();
-            testSep = new SeparationEventArgs(DateTime.ParseExact("20180408143814504", "yyyyMMddHHmmssfff", System.Globalization.CultureInfo.InvariantCulture), "VBF451", "VBF461");
+            testSep = new SeparationEventArgs(DateTime.ParseExact("20180408143814504", "yyyyMMddHHmmssfff", System.Globalization.CultureInfo.InvariantCulture), "VBF461", "VBF451");
             TestList.Add(testSep);
         }
 
         [Test]
         public void IsCorrectInfoPassedOn()
         {
-            var args = new RawTransponderDataEventArgs(new List<string> { "VBF451;85000;28912;7300;20180408143814504" });
-            var args2 = new RawTransponderDataEventArgs(new List<string> { "VBF461;85000;28912;7300;20180408143814504" });
+            var args = new RawTransponderDataEventArgs(new List<string> { "VBF451;85000;28912;7300;20180408143814504", "VBF461;84000;28902;7300;20180408143814504" });
+            
 
             _RecieveAircrafts.UpdateTransponderData(args);
-            _RecieveAircrafts.UpdateTransponderData(args2);
-            Assert.AreEqual(TestList,_SeparationEvent.listOfCurrentSeparationEvents);
+
+            Assert.AreEqual(TestList[0],_SeparationEvent.listOfCurrentSeparationEvents[0]);
             //_handleSeparationEvents.Received().Update(TestList);
         }
     }
