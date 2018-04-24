@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,24 +21,29 @@ namespace AirTrafficMonitoringIntegrationTest
         private RecieveAircrafts _recieveAircrafts;
         private IMonitoringAirSpace _monitoringAirSpace;
         private ICourseAndVelocityCalculator _courseAndVelocityCalculator;
-        private SubjectObserver _observer;
+        private IObserver _iobs;
         private ITransponderReceiver _receiver;
+        private ISeparationEvent _sepEvent;
         private int _nEventsReceived;
         private int _mEvnetsReceived;
         private List<string> _list;
         private List<Aircraft> _aircraftlist;
+        private Aircraft _aircraft;
+        private List<Aircraft> _aircraftlist1;
 
         [SetUp]
         public void Setup()
         {
-            _airCraftObjectsUtility = new AircraftObjectsUtility();
-            _recieveAircrafts = new RecieveAircrafts(_receiver, _airCraftObjectsUtility);
-            _monitoringAirSpace= new MonitoringAirSpace(_recieveAircrafts);
             _courseAndVelocityCalculator = new CourseAndVelocityCalculator();
-            _observer = new SubjectObserver();
+            _airCraftObjectsUtility = new AircraftObjectsUtility();
+            _receiver = Substitute.For<ITransponderReceiver>();
+            _recieveAircrafts = new RecieveAircrafts(_receiver, _airCraftObjectsUtility, _courseAndVelocityCalculator);
+            _monitoringAirSpace= new MonitoringAirSpace(_recieveAircrafts);
+            _sepEvent = new CreateSeparationEvents();
+            _aircraft = new Aircraft("VBF451",67000,28912,7300, DateTime.ParseExact("20151006213456789", "yyyyMMddHHmmssfff", System.Globalization.CultureInfo.InvariantCulture));
+            _aircraftlist1 = new List<Aircraft>();
+            _aircraftlist1.Add(_aircraft);
             
-
-
             _nEventsReceived = 0;
             _mEvnetsReceived = 0;
 
@@ -57,12 +63,14 @@ namespace AirTrafficMonitoringIntegrationTest
         }
 
         [Test]
-        public void MonitoringAirSpace_Test_of_Update_And_retun_of_list()
+        public void MonitoringAirSpace_Test_of_Monitor_Iscalled()
         {
+            _aircraftlist1= _courseAndVelocityCalculator.CalculateBoth(_aircraftlist1);
+
             var args = new RawTransponderDataEventArgs(new List<string> { "VBF451;67000;28912;7300;20180408143814504" });
             _recieveAircrafts.UpdateTransponderData(args);
             //_receiver.TransponderDataReady += Raise.EventWith(args);
-            Assert.That();
+            //Assert.That(_monitoringAirSpace.Monitor
         }
     }
 }

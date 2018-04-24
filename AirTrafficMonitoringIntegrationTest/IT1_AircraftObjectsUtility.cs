@@ -23,6 +23,7 @@ namespace AirTrafficMonitoringIntegrationTest
         private List<string> _list;
         private List<Aircraft> _aircraftlist;
         private int _nEventsReceived;
+        private IMonitoringAirSpace _monitoringAirSpace;
         [SetUp]
         public void SetUp()
         {
@@ -33,15 +34,23 @@ namespace AirTrafficMonitoringIntegrationTest
             _list = new List<string>();
             _nEventsReceived = 0;
             _recieveAircrafts = new RecieveAircrafts(_receiver, _airCraftObjectsUtility, _courseAndVelocityCalculator);
+            _monitoringAirSpace = Substitute.For<IMonitoringAirSpace>();
+            _recieveAircrafts.TransponderDataObjectReady += (args) =>
+            {
+                _monitoringAirSpace.Monitor(args);
+                _nEventsReceived++;
+            };
 
         }
+
+       
 
         [Test]
         public void AirCraftObjectsUtilityToRecieveAirCraft()
         {
             var args = new RawTransponderDataEventArgs(new List<string> { "VBF451;94717;28912;7300;20180408143814504" });
             _recieveAircrafts.UpdateTransponderData(args);
-            
+           
             Assert.AreEqual(_recieveAircrafts.ListofAircraftObjects[0]._tag, "VBF451");
            
         }
@@ -52,6 +61,14 @@ namespace AirTrafficMonitoringIntegrationTest
             _recieveAircrafts.UpdateTransponderData(args);
             Assert.IsTrue(_recieveAircrafts.ListofAircraftObjects.Count!=0);
            
+        }
+
+        [Test]
+        public void CheckingEventThroughAircraftObjToFakeMonitorAirSpace()
+        {
+            var args = new RawTransponderDataEventArgs(new List<string> { "VBF451;94717;28912;7300;20180408143814504" });
+            _recieveAircrafts.UpdateTransponderData(args);
+            _monitoringAirSpace.Received().Monitor(_recieveAircrafts.ListofAircraftObjects);
         }
     }
 }
