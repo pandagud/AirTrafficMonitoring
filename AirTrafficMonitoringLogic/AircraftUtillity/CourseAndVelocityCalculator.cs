@@ -59,15 +59,19 @@ namespace AirTrafficMonitoringLogic.AircraftUtillity
                 var altDist = Math.Sqrt(Math.Pow(newlist[i]._altitude - OldList[i]._altitude, 2));
                 TimeSpan timeSpan = newlist[i]._timestamp - OldList[i]._timestamp;
                 var timeDiff = (timeSpan.TotalMilliseconds) / 1000;
-                if (xDist == 0 || yDist == 0 || altDist == 0 || timeDiff == 0)
+                try
+                {
+                    var velocity = Math.Abs(Convert.ToInt32(
+                        ((Math.Sqrt(Math.Pow(xDist, 2) + Math.Pow(yDist, 2) + Math.Pow(altDist, 2))) / timeDiff)));
+                    newlist[i].Velocity = velocity;
+                }
+                catch (Exception e)
                 {
                     newlist[i].Velocity = 0;
                 }
-                else
-                {
-                    var velocity = Math.Abs(Convert.ToInt32(((Math.Sqrt(Math.Pow(xDist, 2) + Math.Pow(yDist, 2) + Math.Pow(altDist, 2))) / timeDiff)));
-                    newlist[i].Velocity = velocity;
-                }
+
+                    
+                
                 
             }
             return newlist;
