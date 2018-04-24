@@ -51,7 +51,7 @@ namespace AirTrafficMonitoringIntegrationTest
             _recieveAircrafts.UpdateTransponderData(args);
             var args2 = new RawTransponderDataEventArgs(new List<string> { "VBF451;94617;28912;7300;20180408143815504" });
             _recieveAircrafts.UpdateTransponderData(args2);
-            Assert.IsTrue(_recieveAircrafts.ListofAircraftObjects[0].Course > -180 && _recieveAircrafts.ListofAircraftObjects[0].Course < 180);
+            Assert.IsTrue(_recieveAircrafts.ListofAircraftObjects[0].Course >= -180 && _recieveAircrafts.ListofAircraftObjects[0].Course <= 180);
         }
 
         #endregion
