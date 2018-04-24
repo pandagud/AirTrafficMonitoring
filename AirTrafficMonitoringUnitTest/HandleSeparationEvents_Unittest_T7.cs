@@ -31,6 +31,7 @@ namespace AirTrafficMonitoringUnitTest
             _uut = new HandleSeparationEvents(_iseSeparationEvent, _itToLogFile);
             SeList.Add(se1);
             SeList.Add(se2);
+            SeList.Add(se3);
             _uut.Update(SeList);
 
         }
@@ -47,17 +48,6 @@ namespace AirTrafficMonitoringUnitTest
             SeList.Add(se3);
             _uut.Update(SeList);
             Assert.AreEqual(_uut.listOfCurrentSeparationEvents,SeList);
-        }
-
-
-
-        [Test]
-        public void HandleEvents_UpdatingExistingEvent()
-        {
-            se3 = new SeparationEventArgs(DateTime.Now.AddMinutes(5), "testflight4", "testflight5");
-            SeList.Add(se3);
-            _uut.Update(SeList);
-            Assert.AreEqual(_uut.listOfCurrentSeparationEvents[2],se3);
         }
 
         [Test]
