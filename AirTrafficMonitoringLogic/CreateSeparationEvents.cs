@@ -5,22 +5,22 @@ using System.Text;
 using System.Threading.Tasks;
 using AirTrafficMonitoringLogic.AircraftUtillity;
 using AirTrafficMonitoringLogic.Interface;
+using AirTrafficMonitoringLogic.Utillity;
 
 namespace AirTrafficMonitoringLogic
 {
     
-    public delegate void SeparationEventHandler(object sender, SeparationEventArgs se);
-    public class CreateSeparationEvents : IObserver, ISeparationEvent
+    
+    public class CreateSeparationEvents : SubjectObserverSepArgs,IObserver, ISeparationEvent
     {
-     
-       
-
-       // public event SeparationEventHandler separationEvent;
+        public List<SeparationEventArgs> listOfCurrentSeparationEvents;
+        
         
 
+       // public event SeparationEventHandler separationEvent;
         public void Update(List<Aircraft> s)
         {
-            
+            listOfCurrentSeparationEvents = new List<SeparationEventArgs>();
             List<Aircraft> _tempList = new List<Aircraft>(s);
 
             for (int i = 0; i < s.Count-1; i++)
@@ -28,21 +28,13 @@ namespace AirTrafficMonitoringLogic
                 if (checkAltitude(s[i+1], _tempList[i]) == true && checkHorizontalSeparation(s[i+1], _tempList[i]) == true && s[i+1]._tag != _tempList[i]._tag)
                 {
                     SeparationEventArgs _se = new SeparationEventArgs(s[i+1]._timestamp,s[i+1]._tag,_tempList[i]._tag);
-                    onSeparationEvent(_se);
+                    listOfCurrentSeparationEvents.Add(_se);
                 }
-
-              
             }
+            Notify(listOfCurrentSeparationEvents);
         }
-
-        protected virtual void onSeparationEvent(SeparationEventArgs se)
-        {
-            var handler = SeparationsEvent;
-            if (se != null)
-            {
-                handler(this, se);
-            }
-        }
+        
+        
 
         public bool checkAltitude(Aircraft s, Aircraft s1)
         {
@@ -64,7 +56,5 @@ namespace AirTrafficMonitoringLogic
             }
             else return false;
         }
-
-        public event EventHandler<SeparationEventArgs> SeparationsEvent;
     }
 }
