@@ -14,7 +14,7 @@ using TransponderReceiver;
 namespace AirTrafficMonitoringIntegrationTest
 {
     [TestFixture]
-    class IT7
+    class IT7_HandleSeparationEvent_FromCreateSeparationEvent
     {
         private IToLogFile _iToLogFile;
         private CreateSeparationEvents _SeparationEvent;
