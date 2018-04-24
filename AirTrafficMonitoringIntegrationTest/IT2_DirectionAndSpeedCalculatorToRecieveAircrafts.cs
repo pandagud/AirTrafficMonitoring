@@ -16,14 +16,10 @@ namespace AirTrafficMonitoringIntegrationTest
     class IT2_DirectionAndSpeedCalculatorToRecieveAircrafts
     {
 
-        private IRecieveAircrafts _iRecieveAircrafts;
+        private RecieveAircrafts _recieveAircrafts;
         private ICourseAndVelocityCalculator _iCourseAndVelocityCalculator;
         private ITransponderReceiver _iTransponderReceiver;
         private IAirCraftObjectsUtility _iAirCraftObjectsUtility;
-
-        private List<string> _list;
-        private List<Aircraft> _aircraftlist;
-        private int _nEventsReceived;
 
         [SetUp]
         public void SetUp()
@@ -31,29 +27,29 @@ namespace AirTrafficMonitoringIntegrationTest
             _iTransponderReceiver = Substitute.For<ITransponderReceiver>();
             _iAirCraftObjectsUtility = new AircraftObjectsUtility();
             _iCourseAndVelocityCalculator = new CourseAndVelocityCalculator();
-            _iRecieveAircrafts = Substitute.For<IRecieveAircrafts>(_iTransponderReceiver, _iAirCraftObjectsUtility, _iCourseAndVelocityCalculator);
-            //_iRecieveAircrafts = new RecieveAircrafts(_iTransponderReceiver, _iAirCraftObjectsUtility, _iCourseAndVelocityCalculator);
-
-            _aircraftlist = new List<Aircraft>();
-            _list = new List<string>();
-            _nEventsReceived = 0;
-
-            _iRecieveAircrafts.TransponderDataObjectReady += (args) =>
-            {
-                _aircraftlist = _iAirCraftObjectsUtility.getListofAircraftObjects(_list);
-                _nEventsReceived++;
-            };
+            _recieveAircrafts = new RecieveAircrafts(_iTransponderReceiver, _iAirCraftObjectsUtility, _iCourseAndVelocityCalculator);
         }
 
         #region RecieveAircraftsToDirectionAndSpeedCalculator
 
         [Test]
-        public void UpdateTransponderData_With_CourseAndVelocity()
+        public void UpdateTransponderData_With_Velocity()
         {
-
-
+            var args = new RawTransponderDataEventArgs(new List<string> { "VBF451;94717;28912;7300;20180408143814504" });
+            _recieveAircrafts.UpdateTransponderData(args);
+            var args2 = new RawTransponderDataEventArgs(new List<string> { "VBF451;94617;28912;7300;20180408143815504" });
+            _recieveAircrafts.UpdateTransponderData(args2);           
+;           Assert.AreEqual(_recieveAircrafts.ListofAircraftObjects[0].Velocity,100);
         }
 
+        public void UpdateTransponderData_With_Course()
+        {
+            var args = new RawTransponderDataEventArgs(new List<string> { "VBF451;94717;28912;7300;20180408143814504" });
+            _recieveAircrafts.UpdateTransponderData(args);
+            var args2 = new RawTransponderDataEventArgs(new List<string> { "VBF451;94617;28912;7300;20180408143815504" });
+            _recieveAircrafts.UpdateTransponderData(args2);
+            Assert.AreEqual(_recieveAircrafts.ListofAircraftObjects[0].Course,180);
+        }
 
         #endregion
 
